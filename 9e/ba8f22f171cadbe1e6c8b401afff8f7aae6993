@@ -1,0 +1,41 @@
+tests/AdNoir.UnitTests/OrgUnits/OrgUnitTreeTests.cs
+  s_ed044241ef8578::t_78268a9afcec8d 1-214
+tests/AdNoir.UnitTests/Identity/LockoutPolicyTests.cs
+  s_ed044241ef8578::t_fe4b7c72256d41 1-88,91,93-94
+  s_ed044241ef8578::t_a54be55735bc78 89-90,92
+tests/AdNoir.UnitTests/Identity/UserScopeTests.cs
+  s_ed044241ef8578::t_123833656521b3 1-178
+tests/AdNoir.UnitTests/AdNoir.UnitTests.csproj
+  s_ed044241ef8578::t_5e73be18c1b4dd 30-31
+  s_ed044241ef8578::t_fae77369ac36c3 4-6
+  s_ed044241ef8578::t_1c82991e4e2837 28-29
+  s_ed044241ef8578::t_629d782b071305 14-18
+tests/AdNoir.UnitTests/Hierarchy/HierarchyPathsTests.cs
+  s_ed044241ef8578::t_e8ebaac92d771f 1-146
+tests/AdNoir.UnitTests/Hierarchy/SlugTests.cs
+  s_ed044241ef8578::t_174926a7b4da57 1-142
+tests/AdNoir.UnitTests/Identity/RoleGrantPolicyTests.cs
+  s_ed044241ef8578::t_c9aa8154a39139 280-285,289,298-301,303,307
+  s_ed044241ef8578::t_81649af90e860f 51-56
+  s_ed044241ef8578::t_41148ea3ac5206 375-378,382
+  s_ed044241ef8578::t_f4d4970350e2d9 392
+  s_ed044241ef8578::t_5db3cebfaa3718 1-50,57-279,286-288,290-297,302,304-306,308-374,379-381,383-391,393-437
+CHANGELOG.md
+  s_ed044241ef8578::t_d79e026dd0a5bc 21-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9eba8f22f171cadbe1e6c8b401afff8f7aae6993",
+  "prompts": {},
+  "sessions": {
+    "s_ed044241ef8578": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17b26bb1-ad57-4dd7-b83b-05812c0cc6e6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Ali Demirkaya <alidmrky@gmail.com>"
+    }
+  }
+}
