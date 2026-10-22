@@ -1,0 +1,28 @@
+CHANGELOG.md
+  s_ed044241ef8578::t_486744904e4d79 19-36
+README.md
+  s_ed044241ef8578::t_0a71aabcb1ed0e 7
+NuGet.config
+  s_ed044241ef8578::t_d5a1d925b49ae7 5,7-12
+.github/workflows/ci.yml
+  s_ed044241ef8578::t_f9b41f7088f452 1-87
+CONTRIBUTING.md
+  s_ed044241ef8578::t_1f52152cb9b681 211-219
+  s_ed044241ef8578::t_d21cfd1214ec7f 89-96
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a6a59df2075967129830cc53d7d9765a413338c9",
+  "prompts": {},
+  "sessions": {
+    "s_ed044241ef8578": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17b26bb1-ad57-4dd7-b83b-05812c0cc6e6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Ali Demirkaya <alidmrky@gmail.com>"
+    }
+  }
+}
