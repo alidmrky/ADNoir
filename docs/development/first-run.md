@@ -105,7 +105,7 @@ Tarayıcı otomatik açılmayabilir; mevcut profillerde otomatik açılış kapa
 
 Swagger UI yerine **Scalar** kullanılır. OpenAPI belgesi her API'de `/openapi/v1.json` adresindedir. Bu dokümantasyon uçları Development ortamında açılır. Gateway'de ayrıca Scalar ekranı yoktur ve `/` adresinin 404 dönmesi normaldir.
 
-Identity Scalar ekranından `POST /api/auth/login` çağrısında tenant, yönetici e-postası ve kendi parolanı gönder. Gateway üzerinden giriş adresi `http://localhost:5070/api/auth/login` olur. Dönen access token korumalı çağrılarda `Authorization: Bearer TOKEN` başlığına eklenir.
+Identity Scalar ekranından `POST /api/v1/auth/login` çağrısında tenant, yönetici e-postası ve kendi parolanı gönder. Gateway üzerinden giriş adresi `http://localhost:5070/api/v1/auth/login` olur. Dönen access token korumalı çağrılarda `Authorization: Bearer TOKEN` başlığına eklenir.
 
 Ayrıntılı register → login → korumalı endpoint → refresh örneği ve gateway ayarları için [Gateway ve yerel geliştirme](gateway.md) rehberine bak.
 

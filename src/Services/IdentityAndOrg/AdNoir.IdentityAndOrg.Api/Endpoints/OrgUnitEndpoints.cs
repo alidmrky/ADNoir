@@ -20,7 +20,7 @@ public static class OrgUnitEndpoints
         ArgumentNullException.ThrowIfNull(app);
 
         RouteGroupBuilder group = app
-            .MapGroup("/api/org-units")
+            .MapGroup("/api/v1/org-units")
             .WithTags("Organisation units");
 
         group.MapGet("/", async (

@@ -24,6 +24,8 @@ referanslama. Yeni servis gerçekten ayrı bir veri/iş sınırı mı, mevcut mo
 - İç Identity istemcisi için ayrı servis credential'ı oluştur; sunucuda CanReadPermissionMatrix,
   CanValidateUserSession ve gerekli tenant kapsamını açıkça tanımla.
 - PermissionCatalog ve endpoint RequirePermission kaydını ekle; anonymous yolları tek tek seç.
+- Route grubunu `/api/v1/<kaynak>` olarak tanımla. Sürüm segmenti servisin kendi tanımındadır,
+  Gateway yeniden yazmaz; ayrıntı [API değişiklik politikası](api-policy.md#yol-sürümleme).
 - Gateway route/cluster, CORS gereksinimi, health ve telemetry servis adını ayarla.
 - Production bağlantıları eksikse sessiz fallback açma. Kuyruk/exchange adlarını sabitle.
 - Index sağlayıcılarını DbMigrator'da kaydet; yeni servisin API startup'ında index oluşturma.

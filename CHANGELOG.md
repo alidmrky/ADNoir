@@ -16,6 +16,19 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed — Değişenler
+
+- **BREAKING:** every HTTP business endpoint moved from `/api/...` to `/api/v1/...`.
+  The version segment lives in each service's own route group rather than in a Gateway
+  rewrite, so a direct call and a call through the Gateway carry the same version, and a
+  service can move to `v2` later without the others following.
+  `/.well-known/jwks.json`, `/health/*`, `/scalar/*` and `/openapi/*` stay unversioned.
+  **Migration:** prefix every call with `/v1`, e.g. `POST /api/auth/login` becomes
+  `POST /api/v1/auth/login`.
+  `GatewayRateLimitPolicy` matches the auth endpoints by exact path and was updated with
+  them; without that, login, register and refresh would have silently dropped out of the
+  stricter auth quota into the general anonymous one.
+
 ### Added — Eklenenler
 
 - Unit tests for the domain rules that previously had none: slug derivation, hierarchy path

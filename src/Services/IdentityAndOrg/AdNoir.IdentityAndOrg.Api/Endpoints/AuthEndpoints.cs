@@ -20,7 +20,7 @@ public static class AuthEndpoints
         ArgumentNullException.ThrowIfNull(app);
 
         RouteGroupBuilder group = app
-            .MapGroup("/api/auth")
+            .MapGroup("/api/v1/auth")
             .WithTags("Authentication");
 
         group.MapPost("/register", async (

@@ -96,20 +96,20 @@ $registerBody = @{
     password = $password
     displayName = "Demo User"
 } | ConvertTo-Json -Compress
-$registerBody | curl.exe -sS "$baseUrl/api/auth/register" -H "Content-Type: application/json" --data-binary "@-"
+$registerBody | curl.exe -sS "$baseUrl/api/v1/auth/register" -H "Content-Type: application/json" --data-binary "@-"
 
 $loginBody = @{
     tenantSlug = "adnoir"
     email = $email
     password = $password
 } | ConvertTo-Json -Compress
-$login = ($loginBody | curl.exe -sS "$baseUrl/api/auth/login" -H "Content-Type: application/json" --data-binary "@-") | ConvertFrom-Json
+$login = ($loginBody | curl.exe -sS "$baseUrl/api/v1/auth/login" -H "Content-Type: application/json" --data-binary "@-") | ConvertFrom-Json
 if (-not $login.isSuccess) { throw "Giriş başarısız; response mesajını kontrol et." }
 
-curl.exe -sS "$baseUrl/api/sample-items/00000000-0000-0000-0000-000000000001" -H "Authorization: Bearer $($login.data.accessToken)" -H "Accept-Language: tr"
+curl.exe -sS "$baseUrl/api/v1/sample-items/00000000-0000-0000-0000-000000000001" -H "Authorization: Bearer $($login.data.accessToken)" -H "Accept-Language: tr"
 
 $refreshBody = @{ refreshToken = $login.data.refreshToken } | ConvertTo-Json -Compress
-$refresh = ($refreshBody | curl.exe -sS "$baseUrl/api/auth/refresh" -H "Content-Type: application/json" --data-binary "@-") | ConvertFrom-Json
+$refresh = ($refreshBody | curl.exe -sS "$baseUrl/api/v1/auth/refresh" -H "Content-Type: application/json" --data-binary "@-") | ConvertFrom-Json
 ```
 
 Yeni kayıt otomatik olarak yönetici veya `item:read` yetkisi vermez. Korumalı çağrıda rol atanmamış kullanıcı için 403 beklenebilir. Yetkili kullanıcı için bu örnek ID yoksa 404 beklenir. Başarılı 200 akışı için izinli kullanıcı ve gerçekten var olan kayıt gerekir. Refresh rotasyonludur; sonraki çağrıda yeni refresh token kullanılmalıdır.

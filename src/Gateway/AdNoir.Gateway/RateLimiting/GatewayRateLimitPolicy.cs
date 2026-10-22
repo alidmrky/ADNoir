@@ -34,9 +34,9 @@ public sealed class GatewayRateLimitPolicy(GatewayOptions options, IConnectionMu
         string key = $"ip:{peer}";
         int permits = options.AnonymousPermitLimit;
         string path = (httpContext.Request.Path.Value ?? string.Empty).TrimEnd('/');
-        bool authenticationEndpoint = path.Equals("/api/auth/login", StringComparison.OrdinalIgnoreCase) ||
-            path.Equals("/api/auth/register", StringComparison.OrdinalIgnoreCase) ||
-            path.Equals("/api/auth/refresh", StringComparison.OrdinalIgnoreCase);
+        bool authenticationEndpoint = path.Equals("/api/v1/auth/login", StringComparison.OrdinalIgnoreCase) ||
+            path.Equals("/api/v1/auth/register", StringComparison.OrdinalIgnoreCase) ||
+            path.Equals("/api/v1/auth/refresh", StringComparison.OrdinalIgnoreCase);
 
         if (authenticationEndpoint)
         {

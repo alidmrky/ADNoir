@@ -1,9 +1,9 @@
 # Invoked by role-security.ps1 -AuditChecks against its disposable database only.
 function Invoke-AuditChecks {
     $token=Login 'audit-a' 'admin@audit-a.test'
-    $tenantA=(Check 'audit tenant A' GET '/api/tenants/by-slug/audit-a' $null $token 200).data
-    $tenantB=(Check 'audit tenant B' GET '/api/tenants/by-slug/audit-b' $null $token 200).data
-    $actor=((Check 'audit actor' GET '/api/users/' $null $token 200).data | Where-Object email -eq 'admin@audit-a.test')
+    $tenantA=(Check 'audit tenant A' GET '/api/v1/tenants/by-slug/audit-a' $null $token 200).data
+    $tenantB=(Check 'audit tenant B' GET '/api/v1/tenants/by-slug/audit-b' $null $token 200).data
+    $actor=((Check 'audit actor' GET '/api/v1/users/' $null $token 200).data | Where-Object email -eq 'admin@audit-a.test')
     $ids=@{a=$tenantA.id;b=$tenantB.id;actor=$actor.id;role=$own.id;foreign=$foreign.id}
     $auditChecks=0
     function Mongo-Check($label,$body) {
@@ -26,25 +26,25 @@ require(db.auditLogs.countDocuments({entityId:UUID(ids.foreign),tenantId:UUID(id
 const update=db.auditLogs.findOne({entityId:UUID(ids.role),action:"Updated"});
 require(update.changes.some(c=>c.field==="Name" && c.before==="Reader" && c.after==="Reader Updated"));
 '@
-    $created=(Check 'audited tenant create' POST '/api/tenants/' @{name='Audit Target';slug='audit-target';hierarchyEnabled=$true;timeZoneId='UTC'} $token 201).data
+    $created=(Check 'audited tenant create' POST '/api/v1/tenants/' @{name='Audit Target';slug='audit-target';hierarchyEnabled=$true;timeZoneId='UTC'} $token 201).data
     $ids.target=$created.id
-    $null=Check 'audited tenant update' PUT "/api/tenants/$($created.id)" @{name='Audit Updated';timeZoneId='UTC';status=1;expectedVersion=$created.version} $token 200
+    $null=Check 'audited tenant update' PUT "/api/v1/tenants/$($created.id)" @{name='Audit Updated';timeZoneId='UTC';status=1;expectedVersion=$created.version} $token 200
     Mongo-Check 'target tenant and actor tenant recorded separately' @'
 const logs=db.auditLogs.find({entityId:UUID(ids.target)}).toArray();
 require(logs.length===2 && db.auditLogs.countDocuments({entityId:UUID(ids.target),tenantId:UUID(ids.target),actorTenantId:UUID(ids.a),userId:UUID(ids.actor)})===2);
 '@
-    $person=(Check 'audited user create' POST '/api/users/' @{email='audit-user@audit-a.test';displayName='Audit User';password=$password;orgUnitId=$actor.orgUnitId;mustChangePassword=$false} $token 201).data
+    $person=(Check 'audited user create' POST '/api/v1/users/' @{email='audit-user@audit-a.test';displayName='Audit User';password=$password;orgUnitId=$actor.orgUnitId;mustChangePassword=$false} $token 201).data
     $ids.user=$person.id
     $null=Grant $person $tenantAdmin $token 200
-    $person=(Check 'audit role reapplication version' GET "/api/users/$($person.id)" $null $token 200).data
+    $person=(Check 'audit role reapplication version' GET "/api/v1/users/$($person.id)" $null $token 200).data
     $null=Grant $person $tenantAdmin $token 200
-    $person=(Check 'audit user version' GET "/api/users/$($person.id)" $null $token 200).data
-    $null=Check 'audited user deactivate' POST "/api/users/$($person.id)/deactivate?expectedVersion=$($person.version)" $null $token 200
-    $person=(Check 'audit disabled user version' GET "/api/users/$($person.id)" $null $token 200).data
-    $null=Check 'audited user activate' POST "/api/users/$($person.id)/activate?expectedVersion=$($person.version)" $null $token 200
+    $person=(Check 'audit user version' GET "/api/v1/users/$($person.id)" $null $token 200).data
+    $null=Check 'audited user deactivate' POST "/api/v1/users/$($person.id)/deactivate?expectedVersion=$($person.version)" $null $token 200
+    $person=(Check 'audit disabled user version' GET "/api/v1/users/$($person.id)" $null $token 200).data
+    $null=Check 'audited user activate' POST "/api/v1/users/$($person.id)/activate?expectedVersion=$($person.version)" $null $token 200
     $userToken=Login 'audit-a' 'audit-user@audit-a.test'
     $newPassword='Bb2!'+[Guid]::NewGuid().ToString('N')
-    $null=Check 'audited password change' POST '/api/auth/change-password' @{currentPassword=$password;newPassword=$newPassword} $userToken 200
+    $null=Check 'audited password change' POST '/api/v1/auth/change-password' @{currentPassword=$password;newPassword=$newPassword} $userToken 200
     Mongo-Check 'user history and masked password' @'
 const logs=db.auditLogs.find({entityId:UUID(ids.user)}).toArray();
 require(logs.length===6);
@@ -58,16 +58,16 @@ require(db.auditLogs.countDocuments({entityId:UUID(ids.user),tenantId:UUID(ids.a
 require(logs.every(l=>l.correlationId && l.occurredAtUtc instanceof Date));
 require(logs.every(l=>l.changes.every(c=>!["PasswordHash","Email","DisplayName"].includes(c.field))));
 '@
-    $rootUnit=(Check 'audited org create' POST '/api/org-units/' @{name='Audit Root';slug='audit-root'} $token 201).data
+    $rootUnit=(Check 'audited org create' POST '/api/v1/org-units/' @{name='Audit Root';slug='audit-root'} $token 201).data
     $ids.org=$rootUnit.id
-    $child=(Check 'audited child create' POST '/api/org-units/' @{name='Audit Child';slug='audit-child';parentId=$rootUnit.id} $token 201).data
+    $child=(Check 'audited child create' POST '/api/v1/org-units/' @{name='Audit Child';slug='audit-child';parentId=$rootUnit.id} $token 201).data
     $ids.child=$child.id
-    $rootUnit=(Check 'audited org rename' PUT "/api/org-units/$($rootUnit.id)" @{name='Renamed';slug='audit-renamed';code=$null;expectedVersion=$rootUnit.version} $token 200).data
-    $rootUnit=(Check 'audited org move' POST "/api/org-units/$($rootUnit.id)/move" @{newParentId=$actor.orgUnitId;expectedVersion=$rootUnit.version} $token 200).data
-    $null=Check 'stale org edit has no audit' PUT "/api/org-units/$($rootUnit.id)" @{name='Stale';slug=$null;code=$null;expectedVersion=1} $token 409
-    $rootUnit=(Check 'audited name-only rename' PUT "/api/org-units/$($rootUnit.id)" @{name='Final Name';slug=$null;code=$null;expectedVersion=$rootUnit.version} $token 200).data
-    $child=(Check 'audit moved child' GET "/api/org-units/$($child.id)" $null $token 200).data
-    $null=Check 'audited org delete' DELETE "/api/org-units/$($child.id)" $null $token 200
+    $rootUnit=(Check 'audited org rename' PUT "/api/v1/org-units/$($rootUnit.id)" @{name='Renamed';slug='audit-renamed';code=$null;expectedVersion=$rootUnit.version} $token 200).data
+    $rootUnit=(Check 'audited org move' POST "/api/v1/org-units/$($rootUnit.id)/move" @{newParentId=$actor.orgUnitId;expectedVersion=$rootUnit.version} $token 200).data
+    $null=Check 'stale org edit has no audit' PUT "/api/v1/org-units/$($rootUnit.id)" @{name='Stale';slug=$null;code=$null;expectedVersion=1} $token 409
+    $rootUnit=(Check 'audited name-only rename' PUT "/api/v1/org-units/$($rootUnit.id)" @{name='Final Name';slug=$null;code=$null;expectedVersion=$rootUnit.version} $token 200).data
+    $child=(Check 'audit moved child' GET "/api/v1/org-units/$($child.id)" $null $token 200).data
+    $null=Check 'audited org delete' DELETE "/api/v1/org-units/$($child.id)" $null $token 200
     Mongo-Check 'rename and move include descendant audit' @'
 const logs=db.auditLogs.find({entityId:UUID(ids.child)}).toArray();
 require(logs.length===4 && logs.filter(l=>l.action==="Updated").length===2 && logs.some(l=>l.action==="Deleted"));
@@ -79,7 +79,7 @@ db.auditCheckState.insertOne({_id:"before",count:db.auditLogs.countDocuments({})
 require(db.runCommand({collMod:"auditLogs",validator:{entityType:{$ne:"Role"}},validationLevel:"strict",validationAction:"error"}).ok===1);
 '@
     try {
-        $null=Check 'audit failure rejects role creation' POST '/api/roles/' @{code='AuditRollback';name='Rollback';permissions=@('user:read')} $token 500
+        $null=Check 'audit failure rejects role creation' POST '/api/v1/roles/' @{code='AuditRollback';name='Rollback';permissions=@('user:read')} $token 500
         Mongo-Check 'audit failure rolls back role and permission version' @'
 const before=db.auditCheckState.findOne({_id:"before"});
 require(db.roles.countDocuments({code:"AuditRollback"})===0);
@@ -90,7 +90,7 @@ require(db.auditLogs.countDocuments({})===before.count);
         Mongo-Check 'remove audit failure fixture' 'require(db.runCommand({collMod:"auditLogs",validator:{},validationLevel:"strict"}).ok===1);'
     }
     $headers=@{Authorization="Bearer $token";'X-Correlation-Id'='audit-correlation-fixture'}
-    $reply=Invoke-WebRequest -Uri 'http://localhost:16170/api/roles/' -Method Post -Headers $headers -ContentType 'application/json' -Body '{"code":"AuditRecovery","name":"Recovery","permissions":["user:read"]}' -SkipHttpErrorCheck
+    $reply=Invoke-WebRequest -Uri 'http://localhost:16170/api/v1/roles/' -Method Post -Headers $headers -ContentType 'application/json' -Body '{"code":"AuditRecovery","name":"Recovery","permissions":["user:read"]}' -SkipHttpErrorCheck
     if ($reply.StatusCode -ne 201) { throw 'Audit recovery failed' }
     $ids.recovery=($reply.Content | ConvertFrom-Json).data.id
     Mongo-Check 'audit recovers and shares response correlation' @'

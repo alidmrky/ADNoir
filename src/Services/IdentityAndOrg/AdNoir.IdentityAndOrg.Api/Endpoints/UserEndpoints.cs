@@ -19,7 +19,7 @@ public static class UserEndpoints
     {
         ArgumentNullException.ThrowIfNull(app);
 
-        RouteGroupBuilder group = app.MapGroup("/api/users").WithTags("Users");
+        RouteGroupBuilder group = app.MapGroup("/api/v1/users").WithTags("Users");
 
         group.MapGet("/", async (
                 IUserService service,
@@ -112,7 +112,7 @@ public static class UserEndpoints
     {
         ArgumentNullException.ThrowIfNull(app);
 
-        RouteGroupBuilder group = app.MapGroup("/api/roles").WithTags("Roles");
+        RouteGroupBuilder group = app.MapGroup("/api/v1/roles").WithTags("Roles");
 
         group.MapGet("/", async (IRoleService service, CancellationToken cancellationToken) =>
             {

@@ -4,7 +4,7 @@
 
 AdNoir.Notification ayrı bir servistir. İlk kanal SMTP, ilk kullanım hoş geldin e-postasıdır. Varsayılan olarak gönderim ve Identity'nin welcome event üretimi kapalıdır. Notification servisi çalıştırılmadan mevcut kimlik işlemleri kullanılabilir.
 
-API: http://localhost:5100, geliştirme dokümantasyonu: http://localhost:5100/scalar/v1. Gateway yalnız geçmiş sorgularını /api/notifications/emails altında yönlendirir. Genel amaçlı, istemcinin istediği adrese istediği gövdeyi gönderen bir API yoktur.
+API: http://localhost:5100, geliştirme dokümantasyonu: http://localhost:5100/scalar/v1. Gateway yalnız geçmiş sorgularını /api/v1/notifications/emails altında yönlendirir. Genel amaçlı, istemcinin istediği adrese istediği gövdeyi gönderen bir API yoktur.
 
 ## Dosya düzeni
 
@@ -86,9 +86,9 @@ Bu sürümde tenant'ın mail özelliği ayarlanır. Son kullanıcı pazarlama te
 
 JWT, notification:read izni ve DataScope.Tenant okuma kapsamı gerekir. Tenant claim'den alınır; query/header ile başka tenant seçilemez. Daha dar kapsam reddedilir.
 
-- GET /api/notifications/emails/: en yeni en fazla 100 kayıt. İsteğe bağlı ?status=Failed filtresi. Tam dışa aktarım veya sayfalama değildir.
-- GET /api/notifications/emails/{id}: maskelenmiş alıcı ve deneme geçmişi. Başka tenant'ın kaydı 404 döner.
-- GET /api/notifications/emails/statistics: son 30 günde oluşturulan kayıtların mevcut durum dağılımı, toplam deneme sayısı, tekrar denenmiş kayıt sayısı, ilk denemeye kadar ortalama bekleme ve ölçülebilen denemelerin ortalama süresi. Mongo üzerinde aggregate edilir.
+- GET /api/v1/notifications/emails/: en yeni en fazla 100 kayıt. İsteğe bağlı ?status=Failed filtresi. Tam dışa aktarım veya sayfalama değildir.
+- GET /api/v1/notifications/emails/{id}: maskelenmiş alıcı ve deneme geçmişi. Başka tenant'ın kaydı 404 döner.
+- GET /api/v1/notifications/emails/statistics: son 30 günde oluşturulan kayıtların mevcut durum dağılımı, toplam deneme sayısı, tekrar denenmiş kayıt sayısı, ilk denemeye kadar ortalama bekleme ve ölçülebilen denemelerin ortalama süresi. Mongo üzerinde aggregate edilir.
 
 İstatistikler oluşturulma tarihine göre bir kohorttur; bugünkü SMTP trafiğiyle aynı ölçüm değildir. Accepted teslimat oranı olarak sunulmaz. Gövde, konu ve tam alıcı API'de dönmez. Sonuç kodları makine kodudur; ham sağlayıcı hata metni gösterilmez.
 

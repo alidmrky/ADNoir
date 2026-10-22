@@ -26,7 +26,7 @@ public static class SampleItemEndpoints
         ArgumentNullException.ThrowIfNull(app);
 
         RouteGroupBuilder group = app
-            .MapGroup("/api/sample-items")
+            .MapGroup("/api/v1/sample-items")
             .WithTags("SampleItems")
             .RequireAuthorization();
 

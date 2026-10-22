@@ -55,10 +55,10 @@ function Check($label,$method,$path,$body,$token,$expected) {
     if ($response.Content) { return ($response.Content | ConvertFrom-Json) }
 }
 function Login($slug,$email) {
-    return (Check "login $slug" POST '/api/auth/login' @{tenantSlug=$slug;email=$email;password=$password} $null 200).data.accessToken
+    return (Check "login $slug" POST '/api/v1/auth/login' @{tenantSlug=$slug;email=$email;password=$password} $null 200).data.accessToken
 }
 function Grant($user,$role,$token,$expected, $scope=3) {
-    return Check 'role assignment' PUT "/api/users/$($user.id)/roles" @{
+    return Check 'role assignment' PUT "/api/v1/users/$($user.id)/roles" @{
         expectedVersion=$user.version
         assignments=@(@{roleId=$role.id;roleCode=$role.code;readScope=$scope;writeScope=$scope})
     } $token $expected
@@ -123,7 +123,7 @@ try {
     $null=Start-App 'AdNoir.Gateway' 'src/Gateway/AdNoir.Gateway' @{ASPNETCORE_URLS='http://localhost:16170';ReverseProxy__Clusters__identity__Destinations__primary__Address='http://localhost:16180/';ReverseProxy__Clusters__sample__Destinations__primary__Address='http://localhost:16190/';ReverseProxy__Clusters__notification__Destinations__primary__Address='http://localhost:16200/'}
     Wait-Http 'http://localhost:16170/health/live'
     $token=Login 'adnoir' 'admin@adnoir.local'
-    $tenants=(Check 'get seeded tenant' GET '/api/tenants/' $null $token 200).data
+    $tenants=(Check 'get seeded tenant' GET '/api/v1/tenants/' $null $token 200).data
     $tenant=$tenants[0].id
     if (-not $tenant) { throw 'Tenant ID missing' }
     Grpc-Check 'missing credential denied' $tenant $null $null 16
@@ -157,47 +157,47 @@ try {
     Wait-Http 'http://localhost:16190/health/live'
     $null=Start-App 'AdNoir.Notification.Api' 'src/Services/Notification/AdNoir.Notification.Api' @{ASPNETCORE_URLS='http://localhost:16200'}
     Wait-Http 'http://localhost:16200/health/live'
-    $null=Check 'Sample cold permission cache uses service credential' GET '/api/sample-items/00000000-0000-0000-0000-000000000001' $null $token 404
-    $null=Check 'Notification cold permission cache uses service credential' GET '/api/notifications/emails/' $null $token 200
+    $null=Check 'Sample cold permission cache uses service credential' GET '/api/v1/sample-items/00000000-0000-0000-0000-000000000001' $null $token 404
+    $null=Check 'Notification cold permission cache uses service credential' GET '/api/v1/notifications/emails/' $null $token 200
     if ($SessionChecks) {
-        $null=Check 'anonymous password change denied' POST '/api/auth/change-password' @{currentPassword=$password;newPassword='Different123!'} $null 401
-        $users=(Check 'get administrator unit' GET '/api/users/' $null $token 200).data
+        $null=Check 'anonymous password change denied' POST '/api/v1/auth/change-password' @{currentPassword=$password;newPassword='Different123!'} $null 401
+        $users=(Check 'get administrator unit' GET '/api/v1/users/' $null $token 200).data
         $owner=$users | Where-Object email -eq 'admin@adnoir.local'
-        $roles=(Check 'get tenant administrator role' GET '/api/roles/' $null $token 200).data
+        $roles=(Check 'get tenant administrator role' GET '/api/v1/roles/' $null $token 200).data
         $role=$roles | Where-Object code -eq 'TenantAdmin'
-        $user=(Check 'create mandatory password user' POST '/api/users/' @{email='forced@example.test';displayName='Forced';password=$password;orgUnitId=$owner.orgUnitId;mustChangePassword=$true} $token 201).data
+        $user=(Check 'create mandatory password user' POST '/api/v1/users/' @{email='forced@example.test';displayName='Forced';password=$password;orgUnitId=$owner.orgUnitId;mustChangePassword=$true} $token 201).data
         $null=Grant $user $role $token 200
-        $login=Check 'forced user login' POST '/api/auth/login' @{tenantSlug='adnoir';email='forced@example.test';password=$password} $null 200
+        $login=Check 'forced user login' POST '/api/v1/auth/login' @{tenantSlug='adnoir';email='forced@example.test';password=$password} $null 200
         $forced=$login.data.accessToken
-        foreach($path in @('/api/users/','/api/notifications/emails/','/api/sample-items/00000000-0000-0000-0000-000000000001')) {
+        foreach($path in @('/api/v1/users/','/api/v1/notifications/emails/','/api/v1/sample-items/00000000-0000-0000-0000-000000000001')) {
             $denial=Check 'forced password blocks business access' GET $path $null $forced 403
             if ($denial.messageCode -ne 'identity.password.change_required') { throw 'Password-change denial code missing.' }
         }
-        $renewed=Check 'refresh preserves password requirement' POST '/api/auth/refresh' @{refreshToken=$login.data.refreshToken} $null 200
-        $null=Check 'refreshed forced session still blocked' GET '/api/users/' $null $renewed.data.accessToken 403
+        $renewed=Check 'refresh preserves password requirement' POST '/api/v1/auth/refresh' @{refreshToken=$login.data.refreshToken} $null 200
+        $null=Check 'refreshed forced session still blocked' GET '/api/v1/users/' $null $renewed.data.accessToken 403
         $newPassword='Bb2!' + [Guid]::NewGuid().ToString('N')
-        $null=Check 'required password change allowed' POST '/api/auth/change-password' @{currentPassword=$password;newPassword=$newPassword} $forced 200
-        foreach($path in @('/api/users/','/api/notifications/emails/','/api/sample-items/00000000-0000-0000-0000-000000000001')) {
+        $null=Check 'required password change allowed' POST '/api/v1/auth/change-password' @{currentPassword=$password;newPassword=$newPassword} $forced 200
+        foreach($path in @('/api/v1/users/','/api/v1/notifications/emails/','/api/v1/sample-items/00000000-0000-0000-0000-000000000001')) {
             $null=Check 'old token rejected after password change' GET $path $null $forced 401
         }
-        $null=Check 'old refresh rejected after password change' POST '/api/auth/refresh' @{refreshToken=$renewed.data.refreshToken} $null 401
-        $login=Check 'new password login' POST '/api/auth/login' @{tenantSlug='adnoir';email='forced@example.test';password=$newPassword} $null 200
+        $null=Check 'old refresh rejected after password change' POST '/api/v1/auth/refresh' @{refreshToken=$renewed.data.refreshToken} $null 401
+        $login=Check 'new password login' POST '/api/v1/auth/login' @{tenantSlug='adnoir';email='forced@example.test';password=$newPassword} $null 200
         $fresh=$login.data.accessToken
-        $null=Check 'new session business access restored' GET '/api/users/' $null $fresh 200
-        $user=(Check 'get version before role replacement' GET "/api/users/$($user.id)" $null $token 200).data
+        $null=Check 'new session business access restored' GET '/api/v1/users/' $null $fresh 200
+        $user=(Check 'get version before role replacement' GET "/api/v1/users/$($user.id)" $null $token 200).data
         $user=(Grant $user $role $token 200).data
-        $null=Check 'role change invalidates old token' GET '/api/notifications/emails/' $null $fresh 401
-        $login=Check 'role change allows fresh login' POST '/api/auth/login' @{tenantSlug='adnoir';email='forced@example.test';password=$newPassword} $null 200
+        $null=Check 'role change invalidates old token' GET '/api/v1/notifications/emails/' $null $fresh 401
+        $login=Check 'role change allows fresh login' POST '/api/v1/auth/login' @{tenantSlug='adnoir';email='forced@example.test';password=$newPassword} $null 200
         $fresh=$login.data.accessToken
-        $user=(Check 'read current version before disabling' GET "/api/users/$($user.id)" $null $token 200).data
-        $null=Check 'disable account' POST "/api/users/$($user.id)/deactivate?expectedVersion=$($user.version)" $null $token 200
-        $null=Check 'disabled account token denied by Sample' GET '/api/sample-items/00000000-0000-0000-0000-000000000001' $null $fresh 401
-        $null=Check 'disabled account refresh denied' POST '/api/auth/refresh' @{refreshToken=$login.data.refreshToken} $null 401
+        $user=(Check 'read current version before disabling' GET "/api/v1/users/$($user.id)" $null $token 200).data
+        $null=Check 'disable account' POST "/api/v1/users/$($user.id)/deactivate?expectedVersion=$($user.version)" $null $token 200
+        $null=Check 'disabled account token denied by Sample' GET '/api/v1/sample-items/00000000-0000-0000-0000-000000000001' $null $fresh 401
+        $null=Check 'disabled account refresh denied' POST '/api/v1/auth/refresh' @{refreshToken=$login.data.refreshToken} $null 401
         # Stop only our restarted Identity process; cached permissions must not bypass live validation.
         # Identity is the first process added after the initial gateway.
         Stop-Process -Id $children[3].Id
         $children[3].WaitForExit()
-        $null=Check 'Identity outage fails closed despite warm cache' GET '/api/notifications/emails/' $null $token 502
+        $null=Check 'Identity outage fails closed despite warm cache' GET '/api/v1/notifications/emails/' $null $token 502
     }
     Write-Host "PASS $script:checks checks; no unit tests."
 } finally {

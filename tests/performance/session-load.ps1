@@ -55,7 +55,7 @@ function Check($label,$method,$path,$body,$token,$expected) {
     if ($response.Content) { return ($response.Content | ConvertFrom-Json) }
 }
 function Login($slug,$email) {
-    return (Check "login $slug" POST '/api/auth/login' @{tenantSlug=$slug;email=$email;password=$password} $null 200).data.accessToken
+    return (Check "login $slug" POST '/api/v1/auth/login' @{tenantSlug=$slug;email=$email;password=$password} $null 200).data.accessToken
 }
 
 $key=[Convert]::ToBase64String([Security.Cryptography.RandomNumberGenerator]::GetBytes(32))
@@ -77,7 +77,7 @@ try {
     $null=Start-App 'AdNoir.Sample.Api' 'src/Services/Sample/AdNoir.Sample.Api' @{ASPNETCORE_URLS='http://localhost:16390'}
     Wait-Http 'http://localhost:16390/health/live'
     $token=Login 'adnoir' 'admin@adnoir.local'
-    $url='http://localhost:16390/api/sample-items/00000000-0000-0000-0000-000000000001'
+    $url='http://localhost:16390/api/v1/sample-items/00000000-0000-0000-0000-000000000001'
     $runner=[SessionLoadRunner]::new($token)
     $results=@()
     foreach($concurrency in @(1,5,10,20)) {

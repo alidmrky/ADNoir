@@ -55,10 +55,10 @@ function Check($label,$method,$path,$body,$token,$expected) {
     if ($response.Content) { return ($response.Content | ConvertFrom-Json) }
 }
 function Login($slug,$email) {
-    return (Check "login $slug" POST '/api/auth/login' @{tenantSlug=$slug;email=$email;password=$password} $null 200).data.accessToken
+    return (Check "login $slug" POST '/api/v1/auth/login' @{tenantSlug=$slug;email=$email;password=$password} $null 200).data.accessToken
 }
 function Grant($user,$role,$token,$expected, $scope=3) {
-    return Check 'role assignment' PUT "/api/users/$($user.id)/roles" @{
+    return Check 'role assignment' PUT "/api/v1/users/$($user.id)/roles" @{
         expectedVersion=$user.version
         assignments=@(@{roleId=$role.id;roleCode=$role.code;readScope=$scope;writeScope=$scope})
     } $token $expected
@@ -88,46 +88,46 @@ try {
         . (Join-Path $PSScriptRoot 'binding-checks.ps1')
         Invoke-BindingChecks $a
     }
-    $foreign=(Check 'create tenant B role' POST '/api/roles/' @{code='Foreign';name='Foreign';permissions=@('user:read')} $b 201).data
+    $foreign=(Check 'create tenant B role' POST '/api/v1/roles/' @{code='Foreign';name='Foreign';permissions=@('user:read')} $b 201).data
     $b=Login 'audit-b' 'admin@audit-b.test'
-    $null=Check 'foreign role read denied' GET "/api/roles/$($foreign.id)" $null $a 404
-    $null=Check 'foreign role update denied' PUT "/api/roles/$($foreign.id)" @{name='Changed';permissions=@('user:read');expectedVersion=$foreign.version} $a 404
-    $null=Check 'foreign role delete denied' DELETE "/api/roles/$($foreign.id)" $null $a 404
-    $after=(Check 'foreign role unchanged' GET "/api/roles/$($foreign.id)" $null $b 200).data
+    $null=Check 'foreign role read denied' GET "/api/v1/roles/$($foreign.id)" $null $a 404
+    $null=Check 'foreign role update denied' PUT "/api/v1/roles/$($foreign.id)" @{name='Changed';permissions=@('user:read');expectedVersion=$foreign.version} $a 404
+    $null=Check 'foreign role delete denied' DELETE "/api/v1/roles/$($foreign.id)" $null $a 404
+    $after=(Check 'foreign role unchanged' GET "/api/v1/roles/$($foreign.id)" $null $b 200).data
     if ($after.name -ne $foreign.name -or $after.version -ne $foreign.version) { throw 'Foreign role mutated.' }
-    $roles=(Check 'global system roles visible' GET '/api/roles/' $null $a 200).data
+    $roles=(Check 'global system roles visible' GET '/api/v1/roles/' $null $a 200).data
     $super=$roles | Where-Object code -eq 'SuperAdmin'
     $tenantAdmin=$roles | Where-Object code -eq 'TenantAdmin'
     if (-not $super -or -not $tenantAdmin) { throw 'Missing system roles.' }
-    $admin=(Check 'register tenant administrator' POST '/api/auth/register' @{tenantSlug='audit-a';email='tenant@audit-a.test';password=$password;displayName='Tenant Admin'} $null 201).data
-    $member=(Check 'register member' POST '/api/auth/register' @{tenantSlug='audit-a';email='member@audit-a.test';password=$password;displayName='Member'} $null 201).data
+    $admin=(Check 'register tenant administrator' POST '/api/v1/auth/register' @{tenantSlug='audit-a';email='tenant@audit-a.test';password=$password;displayName='Tenant Admin'} $null 201).data
+    $member=(Check 'register member' POST '/api/v1/auth/register' @{tenantSlug='audit-a';email='member@audit-a.test';password=$password;displayName='Member'} $null 201).data
     $null=Grant $admin $tenantAdmin $a 200
     $ta=Login 'audit-a' 'tenant@audit-a.test'
     $null=Grant $member $super $ta 403
-    $null=Check 'platform permission forbidden in custom roles' POST '/api/roles/' @{code='Escalated';name='Escalated';permissions=@('tenant:manage')} $ta 403
-    $null=Check 'reserved role code forbidden' POST '/api/roles/' @{code='superadmin';name='Reserved';permissions=@('user:read')} $ta 403
-    $own=(Check 'allowed tenant role creation' POST '/api/roles/' @{code='Reader';name='Reader';permissions=@('user:read')} $ta 201).data
+    $null=Check 'platform permission forbidden in custom roles' POST '/api/v1/roles/' @{code='Escalated';name='Escalated';permissions=@('tenant:manage')} $ta 403
+    $null=Check 'reserved role code forbidden' POST '/api/v1/roles/' @{code='superadmin';name='Reserved';permissions=@('user:read')} $ta 403
+    $own=(Check 'allowed tenant role creation' POST '/api/v1/roles/' @{code='Reader';name='Reader';permissions=@('user:read')} $ta 201).data
     $ta=Login 'audit-a' 'tenant@audit-a.test'
-    $null=Check 'role update cannot gain platform permission' PUT "/api/roles/$($own.id)" @{name='Escalated';permissions=@('tenant:manage');expectedVersion=$own.version} $ta 403
-    $own=(Check 'allowed tenant role update' PUT "/api/roles/$($own.id)" @{name='Reader Updated';permissions=@('user:read');expectedVersion=$own.version} $ta 200).data
+    $null=Check 'role update cannot gain platform permission' PUT "/api/v1/roles/$($own.id)" @{name='Escalated';permissions=@('tenant:manage');expectedVersion=$own.version} $ta 403
+    $own=(Check 'allowed tenant role update' PUT "/api/v1/roles/$($own.id)" @{name='Reader Updated';permissions=@('user:read');expectedVersion=$own.version} $ta 200).data
     $ta=Login 'audit-a' 'tenant@audit-a.test'
-    $null=Check 'allowed tenant role delete' DELETE "/api/roles/$($own.id)" $null $ta 200
+    $null=Check 'allowed tenant role delete' DELETE "/api/v1/roles/$($own.id)" $null $ta 200
     $ta=Login 'audit-a' 'tenant@audit-a.test'
-    $null=Check 'soft deleted role hidden' GET "/api/roles/$($own.id)" $null $ta 404
+    $null=Check 'soft deleted role hidden' GET "/api/v1/roles/$($own.id)" $null $ta 404
     $a=Login 'audit-a' 'admin@audit-a.test'
-    $allUsers=(Check 'find seeded platform administrator' GET '/api/users/' $null $a 200).data
+    $allUsers=(Check 'find seeded platform administrator' GET '/api/v1/users/' $null $a 200).data
     # PagedResponse stores the user collection directly under data.
     $seeded=$allUsers | Where-Object email -eq 'admin@audit-a.test'
     if (-not $seeded) { throw 'Seeded administrator not found in user page.' }
     $null=Grant $seeded $tenantAdmin $ta 403
-    $limited=(Check 'create limited delegation role' POST '/api/roles/' @{code='Delegate';name='Delegate';permissions=@('user:manage','user:read','role:read','role:manage')} $ta 201).data
+    $limited=(Check 'create limited delegation role' POST '/api/v1/roles/' @{code='Delegate';name='Delegate';permissions=@('user:manage','user:read','role:read','role:manage')} $ta 201).data
     $ta=Login 'audit-a' 'tenant@audit-a.test'
-    $admin=(Check 'read tenant administrator version' GET "/api/users/$($admin.id)" $null $ta 200).data
+    $admin=(Check 'read tenant administrator version' GET "/api/v1/users/$($admin.id)" $null $ta 200).data
     $null=Grant $admin $limited $ta 200 1
-    $null=Check 'stale actor cannot create role' POST '/api/roles/' @{code='Stale';name='Stale';permissions=@('user:read')} $ta 401
+    $null=Check 'stale actor cannot create role' POST '/api/v1/roles/' @{code='Stale';name='Stale';permissions=@('user:read')} $ta 401
     $restricted=Login 'audit-a' 'tenant@audit-a.test'
-    $null=Check 'unit scope cannot edit tenant-wide definitions' POST '/api/roles/' @{code='Wide';name='Wide';permissions=@('user:read')} $restricted 403
-    $self=(Check 'same unit account remains accessible' GET "/api/users/$($admin.id)" $null $restricted 200).data
+    $null=Check 'unit scope cannot edit tenant-wide definitions' POST '/api/v1/roles/' @{code='Wide';name='Wide';permissions=@('user:read')} $restricted 403
+    $self=(Check 'same unit account remains accessible' GET "/api/v1/users/$($admin.id)" $null $restricted 200).data
     $null=Grant $self $limited $restricted 403 3
     $null=Grant $self $tenantAdmin $restricted 403 1
     if ($AuditChecks) {

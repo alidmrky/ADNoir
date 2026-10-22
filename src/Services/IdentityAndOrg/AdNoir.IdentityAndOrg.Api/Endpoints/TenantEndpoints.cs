@@ -25,7 +25,7 @@ public static class TenantEndpoints
         ArgumentNullException.ThrowIfNull(app);
 
         RouteGroupBuilder group = app
-            .MapGroup("/api/tenants")
+            .MapGroup("/api/v1/tenants")
             .WithTags("Tenants");
 
         group.MapGet("/", async (

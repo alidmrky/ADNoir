@@ -21,6 +21,21 @@ davranıştır, bir istisna değildir.
 `1.0.0` için bir tarih taahhüt edilmez. Bu belgede "`1.0.0` sonrası" denilen garantiler
 bugün geçerli değildir.
 
+## Yol sürümleme
+
+Bütün HTTP iş uçları `/api/v1/...` altındadır. Sürüm segmenti **servisin kendi route
+tanımındadır**, Gateway'in yeniden yazmasıyla değil: sözleşme servise aittir, bu yüzden
+doğrudan servise yapılan çağrı da, Gateway üzerinden geçen de aynı sürümü taşır. Böylece
+ileride bir servis `v2`'ye geçerken diğerleri `v1`'de kalabilir.
+
+Sürümsüz kalan uçlar: `/.well-known/jwks.json` (standart URI), `/health/*`, `/scalar/*` ve
+`/openapi/*`. Bunlar iş sözleşmesi değildir.
+
+Yeni servis eklerken route grubunu `/api/v1/<kaynak>` olarak tanımla; Gateway tarafında da
+aynı yolu ekle. Gateway'in istek kotası auth uçlarını **tam yol eşleşmesiyle** seçer, bu
+yüzden auth yollarını değiştiriyorsan `GatewayRateLimitPolicy` içindeki karşılaştırmayı da
+güncelle — aksi halde login/register/refresh sessizce dar auth kotasından çıkar.
+
 ## Kapsam: neyin sözleşme olduğu
 
 Aşağıdakiler **public yüzeydir**; değişimi bu politikaya tabidir.

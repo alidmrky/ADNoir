@@ -2,12 +2,12 @@
 function Invoke-BindingChecks($token) {
     $id = [Guid]::NewGuid().ToString()
     $cases = @(
-        @{Name='malformed JSON'; Path='/api/auth/login'; Body='{"password":"binding-secret",'; Type='application/json'; Code=400},
-        @{Name='missing body'; Path='/api/auth/login'; Body=''; Type='application/json'; Code=400},
-        @{Name='wrong property type'; Path='/api/auth/login'; Body='{"tenantSlug":[],"email":"x","password":"binding-secret"}'; Type='application/json'; Code=400},
-        @{Name='unsupported media'; Path='/api/auth/login'; Body='hello'; Type='text/plain'; Code=415},
-        @{Name='text enum'; Path="/api/users/$id/roles"; Body='{"expectedVersion":1,"assignments":[{"roleId":"00000000-0000-0000-0000-000000000001","roleCode":"x","readScope":"tenant","writeScope":3}]}'; Type='application/json'; Code=400},
-        @{Name='undefined numeric enum'; Path="/api/users/$id/roles"; Body='{"expectedVersion":1,"assignments":[{"roleId":"00000000-0000-0000-0000-000000000001","roleCode":"x","readScope":999,"writeScope":3}]}'; Type='application/json'; Code=400}
+        @{Name='malformed JSON'; Path='/api/v1/auth/login'; Body='{"password":"binding-secret",'; Type='application/json'; Code=400},
+        @{Name='missing body'; Path='/api/v1/auth/login'; Body=''; Type='application/json'; Code=400},
+        @{Name='wrong property type'; Path='/api/v1/auth/login'; Body='{"tenantSlug":[],"email":"x","password":"binding-secret"}'; Type='application/json'; Code=400},
+        @{Name='unsupported media'; Path='/api/v1/auth/login'; Body='hello'; Type='text/plain'; Code=415},
+        @{Name='text enum'; Path="/api/v1/users/$id/roles"; Body='{"expectedVersion":1,"assignments":[{"roleId":"00000000-0000-0000-0000-000000000001","roleCode":"x","readScope":"tenant","writeScope":3}]}'; Type='application/json'; Code=400},
+        @{Name='undefined numeric enum'; Path="/api/v1/users/$id/roles"; Body='{"expectedVersion":1,"assignments":[{"roleId":"00000000-0000-0000-0000-000000000001","roleCode":"x","readScope":999,"writeScope":3}]}'; Type='application/json'; Code=400}
     )
     foreach ($origin in @('http://localhost:16180','http://localhost:16170')) {
         foreach ($case in $cases) {

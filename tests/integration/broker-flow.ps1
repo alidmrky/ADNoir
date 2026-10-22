@@ -55,7 +55,7 @@ function Check($label,$method,$path,$body,$token,$expected) {
     if ($response.Content) { return ($response.Content | ConvertFrom-Json) }
 }
 function Login($slug,$email) {
-    return (Check "login $slug" POST '/api/auth/login' @{tenantSlug=$slug;email=$email;password=$password} $null 200).data.accessToken
+    return (Check "login $slug" POST '/api/v1/auth/login' @{tenantSlug=$slug;email=$email;password=$password} $null 200).data.accessToken
 }
 
 
@@ -98,11 +98,11 @@ try {
   ASPNETCORE_URLS='http://localhost:16400';AdNoir__Notification__Enabled='true';AdNoir__Notification__Smtp__Host='127.0.0.1';AdNoir__Notification__Smtp__Port='25252';AdNoir__Notification__Smtp__From='fixture@example.test';AdNoir__Notification__Smtp__EnableSsl='false'
  }
  Wait-Http 'http://localhost:16400/health/live'
- $null=Check 'register with broker online' POST '/api/auth/register' @{tenantSlug='adnoir';email='online@example.test';displayName='Fixture';password=$password} $null 201
+ $null=Check 'register with broker online' POST '/api/v1/auth/register' @{tenantSlug='adnoir';email='online@example.test';displayName='Fixture';password=$password} $null 201
  Wait-Deliveries 1
  & "$PSScriptRoot/isolated-broker.ps1" -Stop
  if(Get-NetTCPConnection -LocalPort 16672 -State Listen -ErrorAction SilentlyContinue){throw 'Test broker still listening'}
- $null=Check 'register commits while broker unavailable' POST '/api/auth/register' @{tenantSlug='adnoir';email='offline@example.test';displayName='Fixture';password=$password} $null 201
+ $null=Check 'register commits while broker unavailable' POST '/api/v1/auth/register' @{tenantSlug='adnoir';email='offline@example.test';displayName='Fixture';password=$password} $null 201
  Mongo-Assert 'if(db.users.countDocuments({email:"offline@example.test"})!==1 || db.emailDeliveries.countDocuments({})!==1) throw new Error("Mismatch")' 'offline business commit without notification delivery'
  Stop-Process -Id $identity.Id
  $identity.WaitForExit()

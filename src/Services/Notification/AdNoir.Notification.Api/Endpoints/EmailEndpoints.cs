@@ -14,7 +14,7 @@ public static class EmailEndpoints
     /// <summary>Maps permission-protected delivery metadata and aggregate statistics.</summary>
     public static IEndpointRouteBuilder MapEmailEndpoints(this IEndpointRouteBuilder app)
     {
-        RouteGroupBuilder emails = app.MapGroup("/api/notifications/emails").RequireAuthorization()
+        RouteGroupBuilder emails = app.MapGroup("/api/v1/notifications/emails").RequireAuthorization()
             .RequirePermission(PermissionCatalog.Notifications.Read).WithTags("Email history");
         emails.MapGet("/", async (string? status, IEmailQueryService service, CancellationToken cancellationToken) =>
         {
