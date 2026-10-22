@@ -34,7 +34,7 @@
 
   <ItemGroup Label="Tools">
     <!-- DbMigrator is a console host, not a web app, so it needs the generic host directly. -->
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.21" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.13" />
   </ItemGroup>
 
   <ItemGroup Label="BuildingBlocks.Mongo">
