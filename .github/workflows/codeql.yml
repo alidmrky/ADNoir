@@ -1,0 +1,64 @@
+name: CodeQL
+
+# Static security analysis for the C# sources. Findings appear under the repository's
+# Security tab rather than as build output, so this does not gate a pull request the way
+# ci.yml does - it reports.
+#
+# The build is driven manually: autobuild would discover AdNoir.sln on its own, but naming
+# the command keeps the analysed artefacts identical to what CI builds, and keeps the
+# central package versions and the warnings-as-errors settings in play.
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Weekly, so a newly published rule reaches an untouched repository.
+    - cron: '41 4 * * 2'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Analyze C#
+    # Same runner as ci.yml. The solution has only ever been built and verified on Windows;
+    # a Linux runner would probably work, but an unverified guess here shows up as a red
+    # workflow rather than as useful information.
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    permissions:
+      # Required to upload the results to the Security tab.
+      security-events: write
+      actions: read
+      contents: read
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v5
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: csharp
+          queries: security-and-quality
+
+      - name: Build
+        run: dotnet build AdNoir.sln --configuration Release
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: /language:csharp

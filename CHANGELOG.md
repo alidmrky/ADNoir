@@ -40,6 +40,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - GitHub Actions CI: build in `Release` with warnings as errors, plus the unit and
   architecture test suites, on every push and pull request. Integration checks that need
   MongoDB are deliberately excluded.
+- CodeQL static security analysis on push, pull request and weekly.
+- Dependabot for NuGet and GitHub Actions, grouped into one weekly pull request each.
+  Major MassTransit bumps are ignored: v9 is a commercial licence change that has to be
+  planned rather than merged from a bot PR.
+- An English summary section in the README. Code and commit messages were already English
+  and `docs/` stays Turkish; this only lowers the barrier to a first look.
 
 ### Changed — Değişenler
 

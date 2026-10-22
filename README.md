@@ -1,5 +1,7 @@
 # ADNoir
 
+**Türkçe** · [English summary ↓](#english)
+
 [Dokümantasyon merkezi](docs/README.md) · [Servis kataloğu](docs/services/README.md) · [Yeni servis eklemek](docs/development/new-service.md)
 
 **Çok kiracılı uygulamalar için .NET ve MongoDB tabanlı, servis odaklı bir backend altyapısı.**
@@ -152,3 +154,76 @@ Güncel sürüm **0.1.0**. Proje `0.x` hattındadır: public yüzey kararlı de�
 ## Lisans
 
 [MIT](LICENSE) — Copyright (c) 2026 Ali Demirkaya.
+
+---
+
+## English
+
+A **multi-tenant backend foundation** built on .NET 9 and MongoDB. It is not a CRM, a
+storefront or any finished product: it provides the identity, authorization, data access
+and messaging mechanisms such systems need every time, so your own business services can
+be written on top of them rather than alongside a second copy.
+
+A tenant is a customer boundary — two tenants on the same deployment never see each
+other's business data. Within a tenant, an organization tree (head office / region /
+dealer) narrows access further. Tenant isolation and role permissions are separate
+controls: holding a permission does not grant access to every tenant's records.
+
+### What it provides
+
+| Area | Approach |
+|---|---|
+| Multi-tenancy | Tenant filter applied in the repository, not per endpoint; crossing the boundary needs an explicit interface and a written justification |
+| Authorization | Role-to-permission matrix with `Self` / `Unit` / `Subtree` / `Tenant` data scopes |
+| Identity | RS256 JWT with public JWKS, refresh token rotation, family revocation on reuse detection, account lockout |
+| Live sessions | Tenant state, account state, security stamp and permission version re-checked per protected request, so a cached permission matrix cannot let a stale token through |
+| Data access | Generic MongoDB repository with automatic tenant, soft-delete and scope filters, and optimistic concurrency through a version field in the update filter |
+| Consistency | MassTransit transactional outbox sharing one Mongo session with the repositories, so a data change and the event it raises commit atomically |
+| API surface | Every response — 404 and 500 included — in one `BaseResponse` envelope; user-facing text resolved from a central `en`/`tr` catalog |
+| Gateway | YARP routing, JWT validation, CORS allow-list, Redis-backed distributed rate limiting |
+| Observability | Serilog, OpenTelemetry, correlation and trace propagation, health endpoints |
+
+### Enforced rather than documented
+
+The architecture rules are checked by tests, including IL-level scanning: layer
+dependencies, the response contract, the no-domain-entities-across-the-boundary rule, and
+cross-tenant access marking. The suite also contains probes that assert each rule *fails*
+on a deliberate violation — a rule never observed to fail is indistinguishable from a rule
+that does not work. CI runs 265 tests on every push and pull request.
+
+### Status
+
+`0.x`. **The public surface is not stable** and breaking changes may land in any minor
+release — see [the API change policy](docs/development/api-policy.md). The project is
+**not production-hardened**: TLS termination, secret management, backups and capacity
+planning are left to the deploying environment. The known trade-offs — access tokens that
+cannot be revoked before expiry, permission caches that do not flush instantly, an audit
+trail without WORM storage — are listed in [SECURITY.md](SECURITY.md) rather than left for
+you to discover.
+
+### Getting started
+
+Requires the .NET 9 SDK and **MongoDB running as a replica set** (a single node is fine for
+development). RabbitMQ and Redis are needed for real cross-service events and distributed
+rate limiting.
+
+```powershell
+git clone https://github.com/alidmrky/ADNoir.git
+cd ADNoir
+Copy-Item .env.example .env
+dotnet build AdNoir.sln
+```
+
+Then run the `DbMigrator` to create indexes and seed, and start Identity, Sample and the
+Gateway. HTTP endpoints live under `/api/v1/`.
+
+### A note on language
+
+Code, type names, comments and commit messages are **English**. The guides under `docs/`
+and the `AGENTS.md` rule files are **Turkish** — that is a deliberate project convention,
+not an oversight. [SECURITY.md](SECURITY.md) and [CONTRIBUTING.md](CONTRIBUTING.md) are
+bilingual. If you want to contribute and the Turkish documentation is a barrier, open an
+issue in English and we will work it out.
+
+[Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Changelog](CHANGELOG.md) ·
+[License: MIT](LICENSE)

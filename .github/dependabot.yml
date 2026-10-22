@@ -1,0 +1,48 @@
+version: 2
+
+# Dependency updates. Both ecosystems are grouped into a single pull request per week so a
+# solo maintainer gets one thing to review rather than a dozen.
+#
+# Security updates ignore the grouping and the schedule: GitHub raises those as soon as an
+# advisory lands, which is the behaviour worth having here.
+
+updates:
+  # NuGet. Versions live in Directory.Packages.props under central package management, so
+  # that is the file Dependabot edits.
+  - package-ecosystem: nuget
+    directory: /
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: "05:17"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps"
+    groups:
+      # Patch and minor bumps rarely need individual attention.
+      routine:
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # MassTransit v9 is a commercial licence change, not a routine upgrade. Staying on
+      # v8 is a deliberate decision; its security window closes on 2026-12-31 and the move
+      # has to be planned rather than merged from a bot PR.
+      - dependency-name: "MassTransit*"
+        update-types: ["version-update:semver-major"]
+
+  # Keeps the workflow actions current. The @v4 actions were already being force-migrated
+  # off Node 20 before this was added; that is the class of change this catches.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: "05:23"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "ci"
+    groups:
+      actions:
+        patterns:
+          - "*"
