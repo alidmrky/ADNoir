@@ -1,0 +1,462 @@
+src/Shared/AdNoir.Domain.Abstractions/Exceptions/AdNoirException.cs
+  s_ed044241ef8578::t_fd815db1e4ad4e 15,17,19-20
+  s_ed044241ef8578::t_13f680c993295d 4,12,54
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Persistence/Indexes/IdentityAndOrgIndexes.cs
+  s_ed044241ef8578::t_2dbcb8525f5f77 53
+  s_ed044241ef8578::t_29c45f0837aa24 42,146,185,207
+tests/AdNoir.ArchitectureTests/Samples/RuleProbes.cs
+  s_ed044241ef8578::t_3c07d517087c6d 14-16
+  s_ed044241ef8578::t_f5086152216c8d 66
+src/Shared/AdNoir.BuildingBlocks.Mongo/Repositories/MongoRepository.cs
+  s_ed044241ef8578::t_95df0cc39e09a5 21
+  s_ed044241ef8578::t_4b1d14c8b53d7e 220
+  s_ed044241ef8578::t_5f90dac1a319e3 14,43,142,202,235,429,511
+src/Shared/AdNoir.Domain.Abstractions/Repositories/IRepository.cs
+  s_ed044241ef8578::t_8c6e10fda5463e 29
+  s_ed044241ef8578::t_88cb5c9efff347 22
+src/Shared/AdNoir.BuildingBlocks/Authorization/UnavailablePermissionMatrixProvider.cs
+  s_ed044241ef8578::t_78a2d43ef84eaa 12-14
+  s_ed044241ef8578::t_d49c5401daa1ed 20-21
+Directory.Build.props
+  s_ed044241ef8578::t_545d944720ba70 5-6
+src/Shared/AdNoir.BuildingBlocks/Configuration/DotEnvConfigurationProvider.cs
+  s_ed044241ef8578::t_dffe2fed5bda45 6,10-14
+tests/AdNoir.ArchitectureTests/AdNoirAssemblies.cs
+  s_ed044241ef8578::t_71dae8e1abb639 59-60
+tests/AdNoir.ArchitectureTests/ResponseContractTests.cs
+  s_ed044241ef8578::t_2bfb40cf07a5e8 15
+  s_ed044241ef8578::t_e2ffba8ffda319 10,65
+src/Shared/AdNoir.Domain.Abstractions/Entities/EntityInterfaces.cs
+  s_ed044241ef8578::t_eefb03bee0dc6d 111-113
+  s_ed044241ef8578::t_edfc6e230abe08 78
+  s_ed044241ef8578::t_964c574e37dc4c 110
+  s_ed044241ef8578::t_a8afacbe64fc2f 4,16,58,68,83,122
+src/Services/IdentityAndOrg/AGENTS.md
+  s_ed044241ef8578::t_175429a1f2fa7f 87,89,93,101,119
+tests/AdNoir.ArchitectureTests/MessageCatalogIntegrityTests.cs
+  s_ed044241ef8578::t_cd8640d892a8a9 11-12,16-19
+  s_ed044241ef8578::t_699499a042f753 54,135
+docker-compose.yml
+  s_ed044241ef8578::t_7903f477554c6c 4-6
+  s_ed044241ef8578::t_865a70bfa0470b 14,76,107
+src/Shared/AdNoir.Shared.Contracts/Responses/ResponseArgs.cs
+  s_ed044241ef8578::t_a59a6b373afa4a 8
+src/Shared/AdNoir.Shared.Contracts/Protos/user_service.proto
+  s_ed044241ef8578::t_ab919e694fda2a 9
+  s_ed044241ef8578::t_4641820364fffa 16
+src/Shared/AdNoir.BuildingBlocks.Mongo/Sessions/MassTransitMongoSessionAccessor.cs
+  s_ed044241ef8578::t_aabdb38130050a 25-26
+  s_ed044241ef8578::t_8f9c59b8d7d315 11-12,16
+  s_ed044241ef8578::t_d1a20ff0ad2ccc 7
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Hierarchy/HierarchyPaths.cs
+  s_ed044241ef8578::t_7b8c321bbe0790 27
+  s_ed044241ef8578::t_22bab75555cbb5 4
+Directory.Packages.props
+  s_ed044241ef8578::t_0f4e56503f5ab2 45,60
+  s_ed044241ef8578::t_ec06b9155526ca 6
+  s_ed044241ef8578::t_3765ebebe88403 4
+src/Shared/AdNoir.BuildingBlocks.Mongo/Sessions/IMongoSessionAccessor.cs
+  s_ed044241ef8578::t_195be995a93c1e 10,12
+  s_ed044241ef8578::t_010c0ccbe4faef 19-22
+src/Shared/AdNoir.BuildingBlocks/Messages/LocalizationOptions.cs
+  s_ed044241ef8578::t_e823cc7a7b8729 17
+  s_ed044241ef8578::t_cfd66726226b3b 4
+docs/development/identity-sample.md
+  s_ed044241ef8578::t_d3641e73712917 16
+src/Services/Sample/AdNoir.Sample.Api/Health/SampleHealthCheckExtensions.cs
+  s_ed044241ef8578::t_b7568efe77f77a 14
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Seeding/IdentityAndOrgSeeder.cs
+  s_ed044241ef8578::t_8ef83f0eac2019 36
+  s_ed044241ef8578::t_9b91f280b260bd 93-95
+  s_ed044241ef8578::t_dbf0a78093bd5a 30
+tests/AdNoir.UnitTests/Responses/BaseResponseTests.cs
+  s_ed044241ef8578::t_c96ef390ebfe9e 8
+  s_ed044241ef8578::t_ba6441597d6ea3 180
+src/Tools/AdNoir.DbMigrator/AdNoir.DbMigrator.csproj
+  s_ed044241ef8578::t_1f1e4356064032 4,6
+src/Services/Sample/AdNoir.Sample.Infrastructure/Messaging/MassTransitConfiguration.cs
+  s_ed044241ef8578::t_ace6b038f7f748 33
+  s_ed044241ef8578::t_5d60803825b86c 101
+  s_ed044241ef8578::t_6927889ba5a658 15,19-20,24,57,74,89
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Persistence/MongoTenantRepository.cs
+  s_ed044241ef8578::t_594768b532ad86 31
+src/Services/Sample/AdNoir.Sample.Infrastructure/Messaging/UserRoleUpdatedConsumer.cs
+  s_ed044241ef8578::t_7aab9692442f24 17
+  s_ed044241ef8578::t_063f443e470c4f 12-13
+  s_ed044241ef8578::t_df28c0320b04ce 26,51
+src/Shared/AdNoir.BuildingBlocks/Http/ExceptionResponseMapper.cs
+  s_ed044241ef8578::t_71ee29da41deaa 17
+  s_ed044241ef8578::t_6b56844cae4551 9
+src/Shared/AdNoir.BuildingBlocks.Mongo/Sessions/StandaloneMongoSessionAccessor.cs
+  s_ed044241ef8578::t_90e74975ee7937 18
+  s_ed044241ef8578::t_fe6364146342bc 12
+src/Shared/AdNoir.BuildingBlocks/Http/AdNoirJsonOptions.cs
+  s_ed044241ef8578::t_6fd5ae7c53116e 13-16
+  s_ed044241ef8578::t_8d8468107fc5d4 9
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/OrgUnits/OrgUnitTree.cs
+  s_ed044241ef8578::t_59360df0b965d5 74-75
+  s_ed044241ef8578::t_dfe5d3fc703439 22
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Identity/User.cs
+  s_ed044241ef8578::t_6de61f2334595e 30-31
+  s_ed044241ef8578::t_11a8ac03d9f0d8 16
+  s_ed044241ef8578::t_a6004d76d4ebbe 8,26,53,71,142
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Hierarchy/Slug.cs
+  s_ed044241ef8578::t_b7d2a149ef8015 7,11-12
+tests/AdNoir.TestKit/AdNoir.TestKit.csproj
+  s_ed044241ef8578::t_f73ea9c49a5290 5-6
+  s_ed044241ef8578::t_20ee0ee8dd19a8 4
+src/Shared/AdNoir.Shared.Contracts/Responses/BaseResponse.cs
+  s_ed044241ef8578::t_1265c471a7c099 19
+  s_ed044241ef8578::t_4eace98e78158e 78-79
+  s_ed044241ef8578::t_086287469c5a6a 12-15
+  s_ed044241ef8578::t_342bd74e6982a8 7-8,48,54,67,70,242,252
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Api/Health/HealthCheckExtensions.cs
+  s_ed044241ef8578::t_ed8e98b53a3425 13
+  s_ed044241ef8578::t_4b7cc0ac73da02 54
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/OrgUnits/Dtos/OrgUnitDtos.cs
+  s_ed044241ef8578::t_c03f5691422885 52-53
+src/Services/Notification/AdNoir.Notification.Infrastructure/Messaging/MassTransitConfiguration.cs
+  s_ed044241ef8578::t_aed9564436a160 105
+  s_ed044241ef8578::t_eb036c0c0c3d95 34
+  s_ed044241ef8578::t_f6adf039124ced 16,20-21,25,59,76,92
+tests/AdNoir.ArchitectureTests/Rules/ResponseContractRule.cs
+  s_ed044241ef8578::t_f78c3d1fa96e74 52
+  s_ed044241ef8578::t_0a51ec61ad678e 80
+  s_ed044241ef8578::t_fd022238befa8a 9
+  s_ed044241ef8578::t_2f9685e1f746cb 84-88
+  s_ed044241ef8578::t_34dad08d301ef6 36,66,74,117
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Security/JwtAccessTokenIssuer.cs
+  s_ed044241ef8578::t_b110628470dfc4 61
+  s_ed044241ef8578::t_60d7a7514f2a71 15,19
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/AdNoir.IdentityAndOrg.Infrastructure.csproj
+  s_ed044241ef8578::t_7f0f2060e540fe 5-6
+  s_ed044241ef8578::t_c30394c25b4375 4
+tests/AdNoir.UnitTests/Configuration/InfrastructureModeTests.cs
+  s_ed044241ef8578::t_54a415cf16f58b 8
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Messaging/IdentityAndOrgMassTransitConfiguration.cs
+  s_ed044241ef8578::t_629481ec5047bd 15,18-19
+  s_ed044241ef8578::t_6d2db7e29d09b5 44
+tests/AdNoir.ArchitectureTests/MessagingBoundaryTests.cs
+  s_ed044241ef8578::t_89e14900d9311c 14
+  s_ed044241ef8578::t_31c3741748d320 41,54,75
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Messaging/PendingIntegrationEventPublisher.cs
+  s_ed044241ef8578::t_6731106a8a9214 35
+  s_ed044241ef8578::t_6bbc223525c10f 8,12-15,18-19
+src/Shared/AdNoir.Shared.Contracts/Responses/PagedResponse.cs
+  s_ed044241ef8578::t_0e8a2297a299ff 7-8
+  s_ed044241ef8578::t_15696e02966e4b 6
+  s_ed044241ef8578::t_82b76a591b359c 10
+docs/development/first-run.md
+  s_ed044241ef8578::t_2ee4fe360df67d 30,33
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Tenants/Tenant.cs
+  s_ed044241ef8578::t_5857a50b3e17da 32
+  s_ed044241ef8578::t_e22ce6b7e43961 6,46,56
+src/Shared/AdNoir.BuildingBlocks/Authorization/EnvelopeAuthorizationResultHandler.cs
+  s_ed044241ef8578::t_6c3af8015a7d27 17
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Identity/Abstractions/IPasswordHasher.cs
+  s_ed044241ef8578::t_5a9f89db7716f2 46
+  s_ed044241ef8578::t_ddec5c551cbc8c 25
+tests/AdNoir.ArchitectureTests/LayerDependencyTests.cs
+  s_ed044241ef8578::t_6508d525e2d665 8,11-12
+  s_ed044241ef8578::t_82c6d1b88913c2 91-92
+  s_ed044241ef8578::t_8e432960bcf011 23,34,59,75,85,107,140
+src/Shared/AdNoir.BuildingBlocks.Mongo/Auditing/AuditTrailOptions.cs
+  s_ed044241ef8578::t_2c8368d5b16394 23
+  s_ed044241ef8578::t_8dafafcb80755f 4,40
+.env.example
+  s_ed044241ef8578::t_c081f48431de95 90
+  s_ed044241ef8578::t_0f4e56503f5ab2 22,30,46,82,105
+  s_ed044241ef8578::t_b31fa21e975c26 63
+  s_ed044241ef8578::t_1a80bcab8e65d4 10
+src/Shared/AdNoir.BuildingBlocks.Mongo/Repositories/IOrgUnitSubtreeResolver.cs
+  s_ed044241ef8578::t_9518831569954e 14-17
+src/Shared/AdNoir.BuildingBlocks/Http/ResponseStatusHttpMap.cs
+  s_ed044241ef8578::t_0e65c3aa4b3512 18-19
+  s_ed044241ef8578::t_2f64cab482c178 7-8
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/OrgUnits/IOrgUnitService.cs
+  s_ed044241ef8578::t_c476f11a58c809 58-59
+  s_ed044241ef8578::t_1e486da5bbf16c 7
+src/Shared/AdNoir.Shared.Contracts/Messages/MessageCodes.cs
+  s_ed044241ef8578::t_5543930cacbaae 219
+  s_ed044241ef8578::t_4f7bec98761140 4,110,132,154,165,186,200,214
+src/Shared/AdNoir.Shared.Contracts/Responses/ResponseMessage.cs
+  s_ed044241ef8578::t_c235e3b892a990 4-5,15,23
+tests/AdNoir.ArchitectureTests/CrossTenantAccessTests.cs
+  s_ed044241ef8578::t_2cf2af4c637811 11,73
+tests/AdNoir.ArchitectureTests/ForbiddenExceptionTests.cs
+  s_ed044241ef8578::t_db268155f6b670 60
+tests/AdNoir.UnitTests/AdNoir.UnitTests.csproj
+  s_ed044241ef8578::t_d0ea019b9ca5bb 4
+tests/AdNoir.UnitTests/Configuration/DotEnvConfigurationProviderTests.cs
+  s_ed044241ef8578::t_cf6304a7c54b36 8
+tests/AdNoir.UnitTests/Messages/MessageCatalogTests.cs
+  s_ed044241ef8578::t_6b2da208a48122 10
+tests/AdNoir.UnitTests/Mongo/MongoConventionTests.cs
+  s_ed044241ef8578::t_5d456119206a9f 11
+docs/development/audit-trail.md
+  s_ed044241ef8578::t_f9346abb5e5577 62
+docs/development/grpc-security.md
+  s_ed044241ef8578::t_6d5fb5130a49b2 67
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Api/AdNoir.IdentityAndOrg.Api.csproj
+  s_ed044241ef8578::t_9f396378b8410d 4,28
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Api/Endpoints/AuthEndpoints.cs
+  s_ed044241ef8578::t_94dd382bd4fa06 12,106
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Api/Endpoints/OrgUnitEndpoints.cs
+  s_ed044241ef8578::t_4843b4fc4fc821 12
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Api/Grpc/PermissionMatrixGrpcService.cs
+  s_ed044241ef8578::t_8683359f774f6f 13,22
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Api/Program.cs
+  s_ed044241ef8578::t_eb4ff799c55640 75,87
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/AdNoir.IdentityAndOrg.Application.csproj
+  s_ed044241ef8578::t_d3db027c3e2975 4
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Identity/Abstractions/IAccessTokenIssuer.cs
+  s_ed044241ef8578::t_fa190920b3fc4c 12
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Identity/AuthService.cs
+  s_ed044241ef8578::t_c87e53b09f2723 19,140,271,381
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Identity/Dtos/IdentityDtos.cs
+  s_ed044241ef8578::t_5620ecb338d1d7 7,13
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Identity/IAuthService.cs
+  s_ed044241ef8578::t_b4bd9e412cab8c 7
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Identity/IUserService.cs
+  s_ed044241ef8578::t_ad9fc5b12c46d4 57,86
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Identity/RoleService.cs
+  s_ed044241ef8578::t_fae0d13310fb81 14,144
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Identity/UserService.cs
+  s_ed044241ef8578::t_b50c763659e210 155,165
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/OrgUnits/OrgUnitService.cs
+  s_ed044241ef8578::t_d2c50e426eadb8 12,189
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/OrgUnits/Validators/OrgUnitRequestValidators.cs
+  s_ed044241ef8578::t_2895d2dd0ed566 61
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Tenants/Dtos/TenantDtos.cs
+  s_ed044241ef8578::t_9d673c854415ca 9,25
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Tenants/ITenantService.cs
+  s_ed044241ef8578::t_df656fed06d904 7,10
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Tenants/TenantService.cs
+  s_ed044241ef8578::t_cab121e7d68f14 15
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Tenants/Validators/TenantRequestValidators.cs
+  s_ed044241ef8578::t_a82112a3889018 12
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/AdNoir.IdentityAndOrg.Domain.csproj
+  s_ed044241ef8578::t_8830603f76a268 4
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Identity/IdentityRepositories.cs
+  s_ed044241ef8578::t_c7e6ce9cbc3b20 58
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Identity/LockoutPolicy.cs
+  s_ed044241ef8578::t_cbf82c60d93f1c 4
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Identity/RefreshToken.cs
+  s_ed044241ef8578::t_912009a8f8114c 28,154
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Identity/Role.cs
+  s_ed044241ef8578::t_f6f4e630a95258 7,90
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/OrgUnits/IOrgUnitRepository.cs
+  s_ed044241ef8578::t_c2be506c7e8b6a 6,24,61
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/OrgUnits/OrgUnit.cs
+  s_ed044241ef8578::t_e59a0a18551085 8
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Tenants/ITenantRepository.cs
+  s_ed044241ef8578::t_ca242dc2d483d4 6
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/DependencyInjection/InfrastructureServiceCollectionExtensions.cs
+  s_ed044241ef8578::t_92e9008799f4e5 53,59,68,86
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Messaging/MassTransitIntegrationEventPublisher.cs
+  s_ed044241ef8578::t_1e7c4a018eea44 10,15
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Persistence/IdentityAndOrgClassMaps.cs
+  s_ed044241ef8578::t_394ac2df01e2ec 13
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Persistence/MongoOrgUnitRepository.cs
+  s_ed044241ef8578::t_30c6ab98956682 12,50,146
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Persistence/MongoRefreshTokenRepository.cs
+  s_ed044241ef8578::t_aefd732911b55d 10,43
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Persistence/OrgUnitSubtreeResolver.cs
+  s_ed044241ef8578::t_b3cf23b861412e 10
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Security/IdentityPasswordHasher.cs
+  s_ed044241ef8578::t_dd4e204553961c 12
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Security/RsaSigningKeyProvider.cs
+  s_ed044241ef8578::t_218fbef25eab39 26
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Seeding/SeedOptions.cs
+  s_ed044241ef8578::t_2642767067f15b 4,29
+src/Services/Notification/AdNoir.Notification.Api/AdNoir.Notification.Api.csproj
+  s_ed044241ef8578::t_2779e6fb7f1fd2 4
+src/Services/Notification/AdNoir.Notification.Application/AdNoir.Notification.Application.csproj
+  s_ed044241ef8578::t_bbf9e828cdc527 4-6
+src/Services/Notification/AdNoir.Notification.Domain/AdNoir.Notification.Domain.csproj
+  s_ed044241ef8578::t_3ff0e47b1948e8 4-5
+src/Services/Notification/AdNoir.Notification.Infrastructure/AdNoir.Notification.Infrastructure.csproj
+  s_ed044241ef8578::t_c8e0565fc50255 4,6
+src/Services/Sample/AdNoir.Sample.Api/AdNoir.Sample.Api.csproj
+  s_ed044241ef8578::t_85aba203632360 4
+src/Services/Sample/AdNoir.Sample.Api/Endpoints/SampleItemEndpoints.cs
+  s_ed044241ef8578::t_c0b2cc31b84973 13
+src/Services/Sample/AdNoir.Sample.Api/Program.cs
+  s_ed044241ef8578::t_923a0931a10aba 20,60,89,99
+src/Services/Sample/AdNoir.Sample.Application/AdNoir.Sample.Application.csproj
+  s_ed044241ef8578::t_4a2b8cce94f393 4-6
+src/Services/Sample/AdNoir.Sample.Application/SampleItems/Dto/SampleItemDto.cs
+  s_ed044241ef8578::t_580b5f143bc4d0 7
+src/Services/Sample/AdNoir.Sample.Application/SampleItems/ISampleItemService.cs
+  s_ed044241ef8578::t_9c2d9b3a3d33c0 15
+src/Services/Sample/AdNoir.Sample.Application/SampleItems/SampleItemService.cs
+  s_ed044241ef8578::t_be71f390ffaf4a 14,18,50
+src/Services/Sample/AdNoir.Sample.Application/SampleItems/Validators/CreateSampleItemRequestValidator.cs
+  s_ed044241ef8578::t_cf6537c7c5b996 12
+src/Services/Sample/AdNoir.Sample.Domain/AdNoir.Sample.Domain.csproj
+  s_ed044241ef8578::t_9d55ca95e96e37 4-5
+src/Services/Sample/AdNoir.Sample.Domain/SampleItems/ISampleItemRepository.cs
+  s_ed044241ef8578::t_32eecc29ea619c 6
+src/Services/Sample/AdNoir.Sample.Domain/SampleItems/SampleItem.cs
+  s_ed044241ef8578::t_66d591eb904111 7
+src/Services/Sample/AdNoir.Sample.Infrastructure/AdNoir.Sample.Infrastructure.csproj
+  s_ed044241ef8578::t_a1a88e32545a96 4,6
+src/Services/Sample/AdNoir.Sample.Infrastructure/DependencyInjection/InfrastructureServiceCollectionExtensions.cs
+  s_ed044241ef8578::t_b451dc4bb1fd47 39,45
+src/Services/Sample/AdNoir.Sample.Infrastructure/Messaging/MassTransitIntegrationEventPublisher.cs
+  s_ed044241ef8578::t_8f9c17ae67198b 8,14,20
+src/Services/Sample/AdNoir.Sample.Infrastructure/Persistence/Indexes/SampleItemIndexProvider.cs
+  s_ed044241ef8578::t_598c3546d2c616 9
+src/Services/Sample/AdNoir.Sample.Infrastructure/Persistence/MongoSampleItemRepository.cs
+  s_ed044241ef8578::t_07ff1baeb47de7 21
+src/Services/Sample/AdNoir.Sample.Infrastructure/Persistence/SampleClassMaps.cs
+  s_ed044241ef8578::t_d8ab92dad12bb1 7
+src/Shared/AdNoir.BuildingBlocks.Mongo/AdNoir.BuildingBlocks.Mongo.csproj
+  s_ed044241ef8578::t_d086ebd47e4737 4
+src/Shared/AdNoir.BuildingBlocks.Mongo/Auditing/AuditFieldMasker.cs
+  s_ed044241ef8578::t_773ee57ce135b4 6
+src/Shared/AdNoir.BuildingBlocks.Mongo/Auditing/AuditLog.cs
+  s_ed044241ef8578::t_4cfcd2635972fe 25
+src/Shared/AdNoir.BuildingBlocks.Mongo/Auditing/AuditTrailBackgroundService.cs
+  s_ed044241ef8578::t_e563e3f02b3ae1 9
+src/Shared/AdNoir.BuildingBlocks.Mongo/Auditing/ChannelAuditTrailWriter.cs
+  s_ed044241ef8578::t_fdb2420f231699 6
+src/Shared/AdNoir.BuildingBlocks.Mongo/Conventions/AdNoirMongoConventions.cs
+  s_ed044241ef8578::t_c3324c85c1a554 9
+src/Shared/AdNoir.BuildingBlocks.Mongo/DependencyInjection/MongoServiceCollectionExtensions.cs
+  s_ed044241ef8578::t_e3c82d0ce08d36 67,103
+src/Shared/AdNoir.BuildingBlocks.Mongo/Indexing/MongoIndexHelpers.cs
+  s_ed044241ef8578::t_f60b283eeff38e 8,24,28,48
+src/Shared/AdNoir.BuildingBlocks.Mongo/Sessions/MongoUnitOfWork.cs
+  s_ed044241ef8578::t_a1a16fb7002702 7
+src/Shared/AdNoir.BuildingBlocks/AdNoir.BuildingBlocks.csproj
+  s_ed044241ef8578::t_aff4a1971aa14c 4,46
+src/Shared/AdNoir.BuildingBlocks/Authorization/AuthorizationEndpointExtensions.cs
+  s_ed044241ef8578::t_a9b70376ec864f 7
+src/Shared/AdNoir.BuildingBlocks/Authorization/IPermissionMatrixProvider.cs
+  s_ed044241ef8578::t_3526941c6fb8b9 4
+src/Shared/AdNoir.BuildingBlocks/Authorization/PermissionAuthorizationHandler.cs
+  s_ed044241ef8578::t_3498237f18ea61 12
+src/Shared/AdNoir.BuildingBlocks/Authorization/PermissionMatrix.cs
+  s_ed044241ef8578::t_1b748ffaa6ef8b 6
+src/Shared/AdNoir.BuildingBlocks/Authorization/PermissionRequirement.cs
+  s_ed044241ef8578::t_5c75b9a4efa98a 6
+src/Shared/AdNoir.BuildingBlocks/Configuration/AdNoirOptions.cs
+  s_ed044241ef8578::t_edca8f5469e101 12,29,46,63,83
+src/Shared/AdNoir.BuildingBlocks/Configuration/InfrastructureMode.cs
+  s_ed044241ef8578::t_f241b594f1553a 25
+src/Shared/AdNoir.BuildingBlocks/Context/AdNoirClaimTypes.cs
+  s_ed044241ef8578::t_737531ffececd6 4,24,51
+src/Shared/AdNoir.BuildingBlocks/Context/HttpContextCurrentUser.cs
+  s_ed044241ef8578::t_b19e0972112f16 9,13
+src/Shared/AdNoir.BuildingBlocks/Context/IClientInfo.cs
+  s_ed044241ef8578::t_d3387da2d52f82 6-7
+src/Shared/AdNoir.BuildingBlocks/Context/ICurrentUser.cs
+  s_ed044241ef8578::t_4044147c5bcbdc 7
+src/Shared/AdNoir.BuildingBlocks/Context/ITenantContext.cs
+  s_ed044241ef8578::t_9fb8ec65598322 4,6,27
+src/Shared/AdNoir.BuildingBlocks/Context/TenantContext.cs
+  s_ed044241ef8578::t_53bd447e753d12 6
+src/Shared/AdNoir.BuildingBlocks/DependencyInjection/BuildingBlocksServiceCollectionExtensions.cs
+  s_ed044241ef8578::t_561364f0860872 19,91,105,124,139
+src/Shared/AdNoir.BuildingBlocks/Http/BaseResponseResult.cs
+  s_ed044241ef8578::t_af6ad73729a5ff 54
+src/Shared/AdNoir.BuildingBlocks/Http/EndpointConventionExtensions.cs
+  s_ed044241ef8578::t_1edaef9a219adc 12
+src/Shared/AdNoir.BuildingBlocks/Http/ExceptionHandlerExtensions.cs
+  s_ed044241ef8578::t_056ac937651f62 9,20-21
+src/Shared/AdNoir.BuildingBlocks/Http/GlobalExceptionHandler.cs
+  s_ed044241ef8578::t_8b8873f7bf6564 11,16
+src/Shared/AdNoir.BuildingBlocks/Http/ResponseEnricher.cs
+  s_ed044241ef8578::t_802d54befa2193 10-11,56
+src/Shared/AdNoir.BuildingBlocks/Http/ResponseResultExtensions.cs
+  s_ed044241ef8578::t_9a06da210913f7 7
+src/Shared/AdNoir.BuildingBlocks/Http/TenantResolutionMiddleware.cs
+  s_ed044241ef8578::t_9ae81bccdda24d 11
+src/Shared/AdNoir.BuildingBlocks/Http/ValidationEndpointFilter.cs
+  s_ed044241ef8578::t_ef757d1d28e809 17,22
+src/Shared/AdNoir.BuildingBlocks/Messages/EmbeddedJsonMessageCatalog.cs
+  s_ed044241ef8578::t_fde20dcc463b6b 33
+src/Shared/AdNoir.BuildingBlocks/Messages/IMessageCatalog.cs
+  s_ed044241ef8578::t_4dd24469ef0c8c 4,12
+src/Shared/AdNoir.BuildingBlocks/Messages/IMessageResolver.cs
+  s_ed044241ef8578::t_e4e05bc8d92b02 6
+src/Shared/AdNoir.BuildingBlocks/Messages/LocalizationApplicationBuilderExtensions.cs
+  s_ed044241ef8578::t_3607f3e04a04ed 9
+src/Shared/AdNoir.BuildingBlocks/Messages/MessagePlaceholders.cs
+  s_ed044241ef8578::t_e665ae52f142db 8
+src/Shared/AdNoir.BuildingBlocks/Observability/OpenTelemetryExtensions.cs
+  s_ed044241ef8578::t_92f86c37f84774 12-14
+src/Shared/AdNoir.BuildingBlocks/Observability/SerilogExtensions.cs
+  s_ed044241ef8578::t_0986e329508715 15-16
+src/Shared/AdNoir.BuildingBlocks/Services/IApplicationService.cs
+  s_ed044241ef8578::t_9fc20dbf06aba3 4
+src/Shared/AdNoir.Domain.Abstractions/AdNoir.Domain.Abstractions.csproj
+  s_ed044241ef8578::t_d45957f7d639f6 4
+src/Shared/AdNoir.Domain.Abstractions/Entities/Bases/EntityBases.cs
+  s_ed044241ef8578::t_910945c56aea44 10
+src/Shared/AdNoir.Domain.Abstractions/Exceptions/DomainExceptions.cs
+  s_ed044241ef8578::t_4bd1546f2c5c8d 17,107,126
+src/Shared/AdNoir.Domain.Abstractions/Repositories/AllowsCrossTenantAccessAttribute.cs
+  s_ed044241ef8578::t_53ae876a5113fb 4
+src/Shared/AdNoir.Domain.Abstractions/Repositories/DataScope.cs
+  s_ed044241ef8578::t_53818eba29c155 4
+src/Shared/AdNoir.Domain.Abstractions/Repositories/IUnitOfWork.cs
+  s_ed044241ef8578::t_e472a9c9540d40 12,20
+src/Shared/AdNoir.Domain.Abstractions/Repositories/IUnsafeCrossTenantQuery.cs
+  s_ed044241ef8578::t_ac6bbd4bd9a031 7
+src/Shared/AdNoir.Shared.Contracts/AdNoir.Shared.Contracts.csproj
+  s_ed044241ef8578::t_412bb22b28fe71 4
+src/Shared/AdNoir.Shared.Contracts/Events/IIntegrationEvent.cs
+  s_ed044241ef8578::t_38c6080a83c1d0 9,24,28
+src/Shared/AdNoir.Shared.Contracts/Events/IIntegrationEventPublisher.cs
+  s_ed044241ef8578::t_3297e4dfd4811a 5,22
+src/Shared/AdNoir.Shared.Contracts/Events/IntegrationEvent.cs
+  s_ed044241ef8578::t_431edc53c1ab9d 12
+src/Shared/AdNoir.Shared.Contracts/Events/SampleItemCreatedEvent.cs
+  s_ed044241ef8578::t_90723b24d4a291 4
+src/Shared/AdNoir.Shared.Contracts/Events/UserRoleUpdatedEvent.cs
+  s_ed044241ef8578::t_3eb85742777903 4,18,24
+src/Shared/AdNoir.Shared.Contracts/Permissions/PermissionCatalog.cs
+  s_ed044241ef8578::t_33fd80897d9002 7,72
+src/Shared/AdNoir.Shared.Contracts/Responses/BaseResponseOfT.cs
+  s_ed044241ef8578::t_9035957c605cb4 6,11,27,182,213,329,333
+src/Shared/AdNoir.Shared.Contracts/Responses/BaseResponseTaskExtensions.cs
+  s_ed044241ef8578::t_b4b6ff13b3e713 4
+src/Shared/AdNoir.Shared.Contracts/Responses/ResponseStatus.cs
+  s_ed044241ef8578::t_2ece5d14301bb4 5,42,51
+src/Tools/AdNoir.DbMigrator/Program.cs
+  s_ed044241ef8578::t_7b635b7c34928d 31,34
+tests/AdNoir.ArchitectureTests/AdNoir.ArchitectureTests.csproj
+  s_ed044241ef8578::t_cb643a57068b50 4,6,36
+tests/AdNoir.ArchitectureTests/Il/IlScanner.cs
+  s_ed044241ef8578::t_e18c6bc1f4373b 23-24,26
+tests/AdNoir.ArchitectureTests/Rules/RepositoryAccessRule.cs
+  s_ed044241ef8578::t_d64e4d3ffbec12 44
+tests/integration/broker-flow.ps1
+  s_ed044241ef8578::t_9a0e2fe587529a 1,3
+tests/integration/grpc-security.ps1
+  s_ed044241ef8578::t_942b1fbe684452 1,3
+tests/integration/isolated-broker.ps1
+  s_ed044241ef8578::t_cb8238bd341c9b 5
+tests/integration/role-security.ps1
+  s_ed044241ef8578::t_5cdf7912434cf4 1,3
+tests/performance/session-load.ps1
+  s_ed044241ef8578::t_d326b3b7b5e0d8 1,3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e00d03b5a78798c2e3971fd6c3b317ead994297c",
+  "prompts": {},
+  "sessions": {
+    "s_ed044241ef8578": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17b26bb1-ad57-4dd7-b83b-05812c0cc6e6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "TURKCELL\\TCADEMIRKAYA <ali.demirkaya@turkcell.com.tr>"
+    }
+  }
+}
