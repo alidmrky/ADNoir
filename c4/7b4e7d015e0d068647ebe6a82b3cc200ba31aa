@@ -1,0 +1,169 @@
+Directory.Packages.props
+  s_ed044241ef8578::t_d79ce8372249a5 1-81
+SECURITY.md
+  s_ed044241ef8578::t_9c9378bfd1ecac 1-168
+src/Services/IdentityAndOrg/AGENTS.md
+  s_ed044241ef8578::t_4d56eb87cee55b 1-131
+.env.example
+  s_ed044241ef8578::t_eb56af8cf0f7c0 1-139
+.github/CODEOWNERS
+  s_ed044241ef8578::t_3b1edc84c89279 1-34
+.github/workflows/ci.yml
+  s_ed044241ef8578::t_3512876040ab66 1-97
+CHANGELOG.md
+  s_ed044241ef8578::t_c3979f135bb642 1-129
+CONTRIBUTING.md
+  s_ed044241ef8578::t_65614fbaeed483 1-262
+Directory.Build.props
+  s_ed044241ef8578::t_46868f186a6d42 1-30
+LICENSE
+  s_ed044241ef8578::t_b510c9314446fa 1-21
+NuGet.config
+  s_ed044241ef8578::t_b3721b822a70d3 1-20
+README.md
+  s_ed044241ef8578::t_9c7fbf4ca0b4f8 1-154
+docker-compose.yml
+  s_ed044241ef8578::t_b89002363cf2b2 1-147
+docs/README.md
+  s_ed044241ef8578::t_485750d562e29c 1-36
+docs/development/api-policy.md
+  s_ed044241ef8578::t_3942e4e79dcab7 1-103
+docs/development/first-run.md
+  s_ed044241ef8578::t_11137fe39e26ef 1-133
+docs/development/gateway.md
+  s_ed044241ef8578::t_d5f9446d7a33cf 1-129
+docs/development/identity-sample.md
+  s_ed044241ef8578::t_081ab48ec82bf0 1-16
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Api/Health/HealthCheckExtensions.cs
+  s_ed044241ef8578::t_7f337b610debd5 1-88
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/Identity/Abstractions/IPasswordHasher.cs
+  s_ed044241ef8578::t_3d560fa9fa31d6 1-49
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/OrgUnits/Dtos/OrgUnitDtos.cs
+  s_ed044241ef8578::t_0841683a11f7fd 1-64
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Application/OrgUnits/IOrgUnitService.cs
+  s_ed044241ef8578::t_0e6269ae98c088 1-81
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Hierarchy/HierarchyPaths.cs
+  s_ed044241ef8578::t_0d6c4a14176e0e 1-122
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Hierarchy/Slug.cs
+  s_ed044241ef8578::t_095f6b158a731a 1-155
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Identity/User.cs
+  s_ed044241ef8578::t_be272f71b66c8d 1-160
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/OrgUnits/OrgUnitTree.cs
+  s_ed044241ef8578::t_0b9d0044a1c250 1-169
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Domain/Tenants/Tenant.cs
+  s_ed044241ef8578::t_ab0ee4a51eb177 1-96
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/AdNoir.IdentityAndOrg.Infrastructure.csproj
+  s_ed044241ef8578::t_36262af86f98a8 1-25
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Messaging/IdentityAndOrgMassTransitConfiguration.cs
+  s_ed044241ef8578::t_557e86ae9ff739 1-86
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Persistence/Indexes/IdentityAndOrgIndexes.cs
+  s_ed044241ef8578::t_2589224861ea0a 1-215
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Persistence/MongoTenantRepository.cs
+  s_ed044241ef8578::t_f61d69177b09e4 1-58
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Security/JwtAccessTokenIssuer.cs
+  s_ed044241ef8578::t_f43088ba415e78 1-85
+src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/Seeding/IdentityAndOrgSeeder.cs
+  s_ed044241ef8578::t_5d41370013724d 1-292
+src/Services/Notification/AdNoir.Notification.Infrastructure/Messaging/MassTransitConfiguration.cs
+  s_ed044241ef8578::t_7ead5f2a540d4c 1-133
+src/Services/Sample/AdNoir.Sample.Api/Health/SampleHealthCheckExtensions.cs
+  s_ed044241ef8578::t_bbab7c76344e8c 1-90
+src/Services/Sample/AdNoir.Sample.Infrastructure/Messaging/MassTransitConfiguration.cs
+  s_ed044241ef8578::t_b8de3f77e91d27 1-126
+src/Services/Sample/AdNoir.Sample.Infrastructure/Messaging/UserRoleUpdatedConsumer.cs
+  s_ed044241ef8578::t_f91d8c2524f270 1-63
+src/Shared/AdNoir.BuildingBlocks.Mongo/Auditing/AuditTrailOptions.cs
+  s_ed044241ef8578::t_93fc5711786c13 1-52
+src/Shared/AdNoir.BuildingBlocks.Mongo/Repositories/IOrgUnitSubtreeResolver.cs
+  s_ed044241ef8578::t_d504a4bb71fa95 1-27
+src/Shared/AdNoir.BuildingBlocks.Mongo/Repositories/MongoRepository.cs
+  s_ed044241ef8578::t_f54895d3b9cb15 1-617
+src/Shared/AdNoir.BuildingBlocks.Mongo/Sessions/IMongoSessionAccessor.cs
+  s_ed044241ef8578::t_1eda8e9b70319e 1-34
+src/Shared/AdNoir.BuildingBlocks.Mongo/Sessions/MassTransitMongoSessionAccessor.cs
+  s_ed044241ef8578::t_62f5d099b959ca 1-56
+src/Shared/AdNoir.BuildingBlocks.Mongo/Sessions/StandaloneMongoSessionAccessor.cs
+  s_ed044241ef8578::t_826b715eae3dd1 1-46
+src/Shared/AdNoir.BuildingBlocks/Authorization/EnvelopeAuthorizationResultHandler.cs
+  s_ed044241ef8578::t_f26f3922cbb4bb 1-86
+src/Shared/AdNoir.BuildingBlocks/Authorization/UnavailablePermissionMatrixProvider.cs
+  s_ed044241ef8578::t_c8a4099d0ed1f4 1-43
+src/Shared/AdNoir.BuildingBlocks/Configuration/DotEnvConfigurationProvider.cs
+  s_ed044241ef8578::t_e2d303c5bf86a3 1-136
+src/Shared/AdNoir.BuildingBlocks/Http/AdNoirJsonOptions.cs
+  s_ed044241ef8578::t_d680964f270cf4 1-43
+src/Shared/AdNoir.BuildingBlocks/Http/ExceptionResponseMapper.cs
+  s_ed044241ef8578::t_a26b1f3fe517a8 1-88
+src/Shared/AdNoir.BuildingBlocks/Http/ResponseStatusHttpMap.cs
+  s_ed044241ef8578::t_fee1199a3f3213 1-52
+src/Shared/AdNoir.BuildingBlocks/Messages/LocalizationOptions.cs
+  s_ed044241ef8578::t_a4ce0d2ff4a2d9 1-19
+src/Shared/AdNoir.Domain.Abstractions/Entities/EntityInterfaces.cs
+  s_ed044241ef8578::t_de4dba94b345ba 1-126
+src/Shared/AdNoir.Domain.Abstractions/Exceptions/AdNoirException.cs
+  s_ed044241ef8578::t_9cbd774431f43d 1-60
+src/Shared/AdNoir.Domain.Abstractions/Repositories/IRepository.cs
+  s_ed044241ef8578::t_8424d807174727 1-137
+src/Shared/AdNoir.Shared.Contracts/Messages/MessageCodes.cs
+  s_ed044241ef8578::t_c11fb33ef6cfc2 1-232
+src/Shared/AdNoir.Shared.Contracts/Protos/user_service.proto
+  s_ed044241ef8578::t_23135e0ee13ff6 1-68
+src/Shared/AdNoir.Shared.Contracts/Responses/BaseResponse.cs
+  s_ed044241ef8578::t_45619ec9f599d8 1-276
+src/Shared/AdNoir.Shared.Contracts/Responses/PagedResponse.cs
+  s_ed044241ef8578::t_608d7289fee5fa 1-81
+src/Shared/AdNoir.Shared.Contracts/Responses/ResponseArgs.cs
+  s_ed044241ef8578::t_f8d087bb46454b 1-49
+src/Shared/AdNoir.Shared.Contracts/Responses/ResponseMessage.cs
+  s_ed044241ef8578::t_9f84086c72f9e9 1-69
+src/Tools/AdNoir.DbMigrator/AdNoir.DbMigrator.csproj
+  s_ed044241ef8578::t_4d31ca53a99041 1-35
+tests/AdNoir.ArchitectureTests/AdNoirAssemblies.cs
+  s_ed044241ef8578::t_64e1cdb2889649 1-97
+tests/AdNoir.ArchitectureTests/CrossTenantAccessTests.cs
+  s_ed044241ef8578::t_8bf40b1578aa74 1-77
+tests/AdNoir.ArchitectureTests/ForbiddenExceptionTests.cs
+  s_ed044241ef8578::t_c4ccf63e316b17 1-62
+tests/AdNoir.ArchitectureTests/LayerDependencyTests.cs
+  s_ed044241ef8578::t_89de309b1c47e2 1-190
+tests/AdNoir.ArchitectureTests/MessageCatalogIntegrityTests.cs
+  s_ed044241ef8578::t_1b753af267bafb 1-164
+tests/AdNoir.ArchitectureTests/MessagingBoundaryTests.cs
+  s_ed044241ef8578::t_7da20f28969490 1-83
+tests/AdNoir.ArchitectureTests/ResponseContractTests.cs
+  s_ed044241ef8578::t_8a279dc7e859ab 1-90
+tests/AdNoir.ArchitectureTests/Rules/ResponseContractRule.cs
+  s_ed044241ef8578::t_bb43262a3bd579 1-164
+tests/AdNoir.ArchitectureTests/Samples/RuleProbes.cs
+  s_ed044241ef8578::t_520db45f247659 1-108
+tests/AdNoir.TestKit/AdNoir.TestKit.csproj
+  s_ed044241ef8578::t_4a1477537dd9c2 1-24
+tests/AdNoir.UnitTests/AdNoir.UnitTests.csproj
+  s_ed044241ef8578::t_ce615772dd301a 1-35
+tests/AdNoir.UnitTests/Configuration/DotEnvConfigurationProviderTests.cs
+  s_ed044241ef8578::t_a38598e14d0958 1-104
+tests/AdNoir.UnitTests/Configuration/InfrastructureModeTests.cs
+  s_ed044241ef8578::t_ee0f6a475d221a 1-71
+tests/AdNoir.UnitTests/Messages/MessageCatalogTests.cs
+  s_ed044241ef8578::t_2c39ed7caa1d02 1-129
+tests/AdNoir.UnitTests/Mongo/MongoConventionTests.cs
+  s_ed044241ef8578::t_195fa33732e829 1-78
+tests/AdNoir.UnitTests/Responses/BaseResponseTests.cs
+  s_ed044241ef8578::t_6f837538f28e01 1-243
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c47b4e7d015e0d068647ebe6a82b3cc200ba31aa",
+  "prompts": {},
+  "sessions": {
+    "s_ed044241ef8578": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17b26bb1-ad57-4dd7-b83b-05812c0cc6e6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Ali Demirkaya <alidmrky@gmail.com>"
+    }
+  }
+}
