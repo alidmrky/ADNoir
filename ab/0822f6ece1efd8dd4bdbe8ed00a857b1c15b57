@@ -1,0 +1,38 @@
+docs/development/api-policy.md
+  s_ed044241ef8578::t_63f9df856e2ffe 1-103
+CHANGELOG.md
+  s_ed044241ef8578::t_e52fee068f2fe1 1-112
+SECURITY.md
+  s_ed044241ef8578::t_246a82c7bf0057 32,114
+  s_ed044241ef8578::t_91ddc68db14375 1-31,33-113,115-168
+LICENSE
+  s_ed044241ef8578::t_44be0a35a3e3fd 1-21
+README.md
+  s_ed044241ef8578::t_182befe45c33a8 18-19
+  s_ed044241ef8578::t_b6de5e0b8a26ec 8-9,144
+  s_ed044241ef8578::t_9ea4e6b6b587d9 143,145-151,153
+CONTRIBUTING.md
+  s_ed044241ef8578::t_0839f0baec38b0 1-238
+docs/README.md
+  s_ed044241ef8578::t_f15ddd4cecbfe1 21
+  s_ed044241ef8578::t_e876304a495f3b 32-35
+  s_ed044241ef8578::t_2a5746f4dbbc7a 36
+.github/CODEOWNERS
+  s_ed044241ef8578::t_ac453766fd73df 1-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ab0822f6ece1efd8dd4bdbe8ed00a857b1c15b57",
+  "prompts": {},
+  "sessions": {
+    "s_ed044241ef8578": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17b26bb1-ad57-4dd7-b83b-05812c0cc6e6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "TURKCELL\\TCADEMIRKAYA <ali.demirkaya@turkcell.com.tr>"
+    }
+  }
+}
