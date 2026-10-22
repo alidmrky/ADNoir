@@ -31,6 +31,19 @@ updates:
       - dependency-name: "MassTransit*"
         update-types: ["version-update:semver-major"]
 
+      # The Microsoft.Extensions.* and Microsoft.AspNetCore.* major versions track the .NET
+      # release they ship with: 9.x is .NET 9, 10.x is .NET 10. The 10.x packages do carry a
+      # net9.0 asset and build cleanly here, so this is not about breakage - it is that
+      # taking some of them splits the family across two .NET lines for no gain, since a
+      # net9.0 application cannot use anything the .NET 10 libraries added.
+      #
+      # These move together when TargetFramework does. Lift this block as part of that
+      # upgrade, not before it.
+      - dependency-name: "Microsoft.Extensions.*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "Microsoft.AspNetCore.*"
+        update-types: ["version-update:semver-major"]
+
   # Keeps the workflow actions current. The @v4 actions were already being force-migrated
   # off Node 20 before this was added; that is the class of change this catches.
   - package-ecosystem: github-actions
