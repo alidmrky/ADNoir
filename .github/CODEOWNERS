@@ -32,3 +32,11 @@
 
 # Architecture rules: loosening one silently removes a guarantee.
 /tests/AdNoir.ArchitectureTests/    @alidmrky
+
+# Frontend. The rule file is binding and self-contained; contracts and the token
+# lifecycle are the two places a mistake is silent rather than loud. components/ui is
+# vendored shadcn output, so a re-generated file should be reviewed as a diff.
+/ui/AGENTS.md                       @alidmrky
+/ui/src/contracts/                  @alidmrky
+/ui/src/lib/auth/                   @alidmrky
+/ui/src/components/ui/              @alidmrky

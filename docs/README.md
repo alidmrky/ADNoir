@@ -19,6 +19,7 @@ yerel kontrollerin geçmesi üretim kabulünün tamamlandığı anlamına gelmez
 - [İşlem audit kayıtları](development/audit-trail.md)
 - [Kod düzeni](development/code-layout.md)
 - [API değişiklik politikası ve sürümleme](development/api-policy.md)
+- [Frontend (React) yapısı](development/ui.md)
 - [AGENTS kurallarının haritası](rules/README.md)
 
 Kuralların bağlayıcı kaynağı kök ve ilgili kaynak dizinindeki AGENTS.md dosyalarıdır.

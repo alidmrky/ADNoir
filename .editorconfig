@@ -11,6 +11,11 @@ indent_size = 4
 [*.{json,yml,yaml,props,targets,csproj,sln,slnx,md}]
 indent_size = 2
 
+# Frontend. Without this block these files inherit indent_size = 4 from [*], which is not
+# what Prettier or any React toolchain produces.
+[*.{ts,tsx,js,jsx,mjs,cjs,css,scss,html}]
+indent_size = 2
+
 [*.md]
 trim_trailing_whitespace = false
 
