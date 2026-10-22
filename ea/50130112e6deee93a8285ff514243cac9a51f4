@@ -1,0 +1,24 @@
+CHANGELOG.md
+  s_ed044241ef8578::t_4074ef60203aad 19-32
+  s_ed044241ef8578::t_6020bddaffa6df 167-168
+README.md
+  s_ed044241ef8578::t_77f9d68dd81639 11,152
+SECURITY.md
+  s_ed044241ef8578::t_77f9d68dd81639 23-24,105-106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ea50130112e6deee93a8285ff514243cac9a51f4",
+  "prompts": {},
+  "sessions": {
+    "s_ed044241ef8578": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17b26bb1-ad57-4dd7-b83b-05812c0cc6e6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Ali Demirkaya <alidmrky@gmail.com>"
+    }
+  }
+}
