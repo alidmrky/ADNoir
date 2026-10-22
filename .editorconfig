@@ -1,0 +1,122 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{json,yml,yaml,props,targets,csproj,sln,slnx,md}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.cs]
+indent_size = 4
+
+# Namespaces
+csharp_style_namespace_declarations = file_scoped:error
+dotnet_style_namespace_match_folder = true:suggestion
+
+# Usings
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+csharp_using_directive_placement = outside_namespace:error
+
+# var
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = false:suggestion
+
+# Modern C# preferences
+csharp_prefer_braces = true:warning
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+csharp_style_prefer_primary_constructors = true:suggestion
+csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_prefer_pattern_matching = true:suggestion
+csharp_style_throw_expression = true:suggestion
+csharp_prefer_simple_using_statement = true:suggestion
+csharp_style_prefer_range_operator = true:suggestion
+csharp_style_prefer_index_operator = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion
+dotnet_style_readonly_field = true:warning
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:warning
+
+# this.
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_event = false:warning
+
+# Naming: interfaces start with I
+dotnet_naming_rule.interfaces_start_with_i.severity = error
+dotnet_naming_rule.interfaces_start_with_i.symbols = interface_symbols
+dotnet_naming_rule.interfaces_start_with_i.style = prefix_i_pascal
+dotnet_naming_symbols.interface_symbols.applicable_kinds = interface
+dotnet_naming_style.prefix_i_pascal.required_prefix = I
+dotnet_naming_style.prefix_i_pascal.capitalization = pascal_case
+
+# Naming: types and members are PascalCase
+dotnet_naming_rule.types_are_pascal.severity = warning
+dotnet_naming_rule.types_are_pascal.symbols = type_symbols
+dotnet_naming_rule.types_are_pascal.style = pascal
+dotnet_naming_symbols.type_symbols.applicable_kinds = class,struct,enum,delegate
+dotnet_naming_style.pascal.capitalization = pascal_case
+
+# Naming: private fields are _camelCase
+dotnet_naming_rule.private_fields_underscore.severity = warning
+dotnet_naming_rule.private_fields_underscore.symbols = private_field_symbols
+dotnet_naming_rule.private_fields_underscore.style = underscore_camel
+dotnet_naming_symbols.private_field_symbols.applicable_kinds = field
+dotnet_naming_symbols.private_field_symbols.applicable_accessibilities = private
+dotnet_naming_style.underscore_camel.required_prefix = _
+dotnet_naming_style.underscore_camel.capitalization = camel_case
+
+# Analyzer severities
+dotnet_diagnostic.IDE0055.severity = warning
+
+# CA1848  — LoggerMessage source generators: not worth the ceremony for a foundation.
+# CA2007  — ConfigureAwait(false): no synchronization context in ASP.NET Core.
+# CA1062  — public argument null checks: guard clauses are applied deliberately (plan C.4).
+# CA1515  — "make internal": shared libraries are consumed across assemblies by design.
+dotnet_diagnostic.CA1848.severity = none
+dotnet_diagnostic.CA2007.severity = none
+dotnet_diagnostic.CA1062.severity = none
+dotnet_diagnostic.CA1515.severity = none
+
+# The plan mandates these shapes explicitly; the analyzer's generic advice does not apply.
+# CA1034  — nested public types: MessageCodes.Identity.UserNotFound is the required form (C.9).
+# CA1000  — statics on generic types: BaseResponse<T>.NotFound(...) is the required form (C.2).
+# CA1040  — empty interfaces: IApplicationService is a marker enforced by an arch test (C.7).
+# CA1724  — type name vs namespace collisions across our own layered namespaces.
+dotnet_diagnostic.CA1034.severity = none
+dotnet_diagnostic.CA1000.severity = none
+dotnet_diagnostic.CA1040.severity = none
+dotnet_diagnostic.CA1724.severity = none
+
+# CA1716 — "Shared" is a reserved word in Visual Basic. The project name AdNoir.Shared.Contracts
+# is fixed by the plan (section 1) and there is no VB consumer, so renaming would trade a real
+# contract for a hypothetical one.
+dotnet_diagnostic.CA1716.severity = none
+
+[tests/**/*.cs]
+# CA1707 — underscores in test names are how the assertion reads as a sentence.
+# CA1861 — inline arrays in assertions are not a hot path.
+# CA1822 — a test method that could be static still has to be an instance method for xUnit.
+# CA1859 — tests deliberately hold interfaces to exercise the abstraction, not the implementation.
+dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.CA1861.severity = none
+dotnet_diagnostic.CA1822.severity = none
+dotnet_diagnostic.CA1859.severity = none
+
+# CA2201 — the probe samples in ArchitectureTests/Samples throw runtime-reserved exceptions on
+# purpose, because the IL rule that forbids them has to be observed catching something. The
+# analyzer covers the same ground for ordinary code, where it stays enabled; the IL test adds
+# what the analyzer cannot: it cannot be silenced with a #pragma in the file under review.
+dotnet_diagnostic.CA2201.severity = none

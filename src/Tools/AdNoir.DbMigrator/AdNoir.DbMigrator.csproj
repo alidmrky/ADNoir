@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Indexes are created here, not at application startup. Startup creation
+    races between instances, delays readiness, and needs write privileges the application
+    should not hold in production. This project also runs the idempotent seed.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AdNoir.DbMigrator</RootNamespace>
+    <AssemblyName>AdNoir.DbMigrator</AssemblyName>
+    <!--
+      CA1873 (avoid unnecessary logger parameter evaluation) is suppressed for this project.
+      Top-level statement programs cannot define partial classes, so the LoggerMessage source
+      generator pattern is not available here. All log calls in this file use simple value
+      types or pre-computed strings, so the performance cost is negligible for a migration tool.
+    -->
+    <NoWarn>$(NoWarn);CA1873</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\Notification\AdNoir.Notification.Infrastructure\AdNoir.Notification.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Services\IdentityAndOrg\AdNoir.IdentityAndOrg.Infrastructure\AdNoir.IdentityAndOrg.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Services\Sample\AdNoir.Sample.Infrastructure\AdNoir.Sample.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Shared\AdNoir.BuildingBlocks.Mongo\AdNoir.BuildingBlocks.Mongo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+  </ItemGroup>
+
+</Project>

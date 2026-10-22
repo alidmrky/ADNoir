@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The adapter layer. References Application, Domain and BuildingBlocks.Mongo.
+    This is the only place in the service allowed to know about MongoDB, and the only place
+    allowed to use MassTransit directly (arch tests enforce both).
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.Notification.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdNoir.Notification.Application\AdNoir.Notification.Application.csproj" />
+    <ProjectReference Include="..\AdNoir.Notification.Domain\AdNoir.Notification.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Shared\AdNoir.BuildingBlocks.Mongo\AdNoir.BuildingBlocks.Mongo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.Net.ClientFactory" />
+    <PackageReference Include="Google.Protobuf" />
+    <PackageReference Include="Grpc.Tools" PrivateAssets="All" />
+    <PackageReference Include="MailKit" />
+    <PackageReference Include="MassTransit" />
+    <PackageReference Include="MassTransit.RabbitMQ" />
+    <PackageReference Include="MassTransit.MongoDb" />
+    <PackageReference Include="AspNetCore.HealthChecks.Rabbitmq" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\..\Shared\AdNoir.Shared.Contracts\Protos\user_service.proto"
+              Link="Protos\user_service.proto" GrpcServices="Client" />
+  </ItemGroup>
+  <ItemGroup><EmbeddedResource Include="Templates\*.json" WithCulture="false" /></ItemGroup>
+</Project>

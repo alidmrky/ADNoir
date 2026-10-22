@@ -1,0 +1,34 @@
+# Code owners for ADNoir.
+# The last matching pattern wins, so the more specific entries sit at the bottom.
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything in the repository.
+*                                   @alidmrky
+
+# Binding rules and the public contract surface: review these deliberately.
+/AGENTS.md                          @alidmrky
+/LICENSE                            @alidmrky
+/SECURITY.md                        @alidmrky
+/CONTRIBUTING.md                    @alidmrky
+/.github/                           @alidmrky
+
+# Build and dependency pinning.
+/Directory.Build.props              @alidmrky
+/Directory.Packages.props           @alidmrky
+/global.json                        @alidmrky
+/NuGet.config                       @alidmrky
+
+# Shared contracts and abstractions: a change here reaches every service.
+/src/Shared/                        @alidmrky
+
+# Identity is the trust root for authentication, tenancy and authorization.
+/src/Services/IdentityAndOrg/       @alidmrky
+
+# The outer HTTP boundary.
+/src/Gateway/                       @alidmrky
+
+# Index and seed application.
+/src/Tools/                         @alidmrky
+
+# Architecture rules: loosening one silently removes a guarantee.
+/tests/AdNoir.ArchitectureTests/    @alidmrky

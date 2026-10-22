@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Services/IdentityAndOrg/AdNoir.IdentityAndOrg.Infrastructure/AdNoir.IdentityAndOrg.Infrastructure.csproj" />
+    <ProjectReference Include="../../src/Services/Sample/AdNoir.Sample.Infrastructure/AdNoir.Sample.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

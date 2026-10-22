@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!--
+    The public-facing host. References Infrastructure, Application and
+    BuildingBlocks. No MongoDB or MassTransit references here — those are in Infrastructure.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.Sample.Api</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdNoir.Sample.Infrastructure\AdNoir.Sample.Infrastructure.csproj" />
+    <ProjectReference Include="..\AdNoir.Sample.Application\AdNoir.Sample.Application.csproj" />
+    <ProjectReference Include="..\..\..\Shared\AdNoir.BuildingBlocks\AdNoir.BuildingBlocks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Scalar.AspNetCore" />
+    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" />
+    <PackageReference Include="AspNetCore.HealthChecks.Rabbitmq" />
+  </ItemGroup>
+
+</Project>

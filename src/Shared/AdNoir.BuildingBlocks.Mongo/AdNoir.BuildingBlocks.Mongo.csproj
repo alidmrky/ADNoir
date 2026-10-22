@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    References BuildingBlocks. This is the ONLY shared project allowed to
+    know about MongoDB. Service Application layers must never reference it.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.BuildingBlocks.Mongo</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdNoir.BuildingBlocks\AdNoir.BuildingBlocks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" />
+    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" />
+    <PackageReference Include="MassTransit.MongoDb" />
+  </ItemGroup>
+
+</Project>

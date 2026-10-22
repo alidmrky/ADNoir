@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    References Domain, Shared.Contracts and BuildingBlocks.
+    Deliberately CANNOT see BuildingBlocks.Mongo - that missing reference is what makes
+    "the Application layer is independent of the database technology" a compile-time fact
+    rather than a convention.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.IdentityAndOrg.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdNoir.IdentityAndOrg.Domain\AdNoir.IdentityAndOrg.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Shared\AdNoir.Shared.Contracts\AdNoir.Shared.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\Shared\AdNoir.BuildingBlocks\AdNoir.BuildingBlocks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+  </ItemGroup>
+
+</Project>

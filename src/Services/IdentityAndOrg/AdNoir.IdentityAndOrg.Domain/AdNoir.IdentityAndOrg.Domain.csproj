@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    A service Domain project may reference ONLY Domain.Abstractions.
+    No MongoDB, no MassTransit, no ASP.NET Core - the hierarchy rules in here are pure
+    logic and must stay testable without any infrastructure.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.IdentityAndOrg.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\AdNoir.Domain.Abstractions\AdNoir.Domain.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

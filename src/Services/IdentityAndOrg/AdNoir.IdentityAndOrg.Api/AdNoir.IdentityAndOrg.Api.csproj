@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!--
+    Program.cs, endpoint definitions, middleware and DI composition only.
+    No business logic lives here.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.IdentityAndOrg.Api</RootNamespace>
+    <AssemblyName>AdNoir.IdentityAndOrg.Api</AssemblyName>
+    <UserSecretsId>adnoir-identity-and-org</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdNoir.IdentityAndOrg.Infrastructure\AdNoir.IdentityAndOrg.Infrastructure.csproj" />
+    <ProjectReference Include="..\AdNoir.IdentityAndOrg.Application\AdNoir.IdentityAndOrg.Application.csproj" />
+    <ProjectReference Include="..\..\..\Shared\AdNoir.BuildingBlocks\AdNoir.BuildingBlocks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" />
+    <PackageReference Include="Grpc.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      The contract lives in Shared.Contracts but is compiled here rather than
+      there. Generating it in Shared.Contracts would pull Google.Protobuf and Grpc.Tools into a
+      project every layer references, including Application - which is supposed to stay free of
+      transport concerns. Linking the file keeps one source of truth without that spread.
+    -->
+    <Protobuf Include="..\..\..\Shared\AdNoir.Shared.Contracts\Protos\user_service.proto"
+              Link="Protos\user_service.proto"
+              GrpcServices="Server" />
+  </ItemGroup>
+
+</Project>

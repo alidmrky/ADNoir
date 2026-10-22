@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    This project references NOTHING. Pure BCL only.
+    Adding a ProjectReference or PackageReference here breaks the dependency graph that
+    every other rule depends on, and is rejected by AdNoir.ArchitectureTests.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.Shared.Contracts</RootNamespace>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,97 @@
+name: CI
+
+# Runs on every push to main and every pull request targeting it.
+#
+# Scope is deliberately limited to checks that need nothing but the SDK:
+#   - the build itself, which is the real static-analysis gate here. Directory.Build.props
+#     sets TreatWarningsAsErrors, EnforceCodeStyleInBuild and AnalysisLevel=latest-recommended,
+#     so a Roslyn analyzer finding, a .editorconfig style violation, a nullable warning or a
+#     missing XML doc comment all fail this workflow.
+#   - AdNoir.UnitTests and AdNoir.ArchitectureTests.
+#
+# The projects under tests/*.IntegrationChecks and the scripts under tests/integration are
+# NOT run here: they need a real MongoDB replica set, and in some cases RabbitMQ and an SMTP
+# listener. Run those locally. See CONTRIBUTING.md.
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A newer push to the same branch cancels an in-flight run for it.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  build-and-test:
+    name: Build and test
+    # Windows matches the environment the solution is developed and verified on.
+    runs-on: windows-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v5
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('Directory.Packages.props', '**/*.csproj') }}
+          restore-keys: ${{ runner.os }}-nuget-
+
+      - name: Restore
+        run: dotnet restore AdNoir.sln
+
+      # Warnings are errors, so this step is the lint gate as well as the build.
+      - name: Build
+        run: dotnet build AdNoir.sln --configuration Release --no-restore
+
+      # The test projects are run as executables rather than through `dotnet test`.
+      #
+      # xunit.v3 builds on Microsoft.Testing.Platform, and the .NET 10 SDK removed the VSTest
+      # bridge that `dotnet test` used to reach it ("Testing with VSTest target is no longer
+      # supported by Microsoft.Testing.Platform on .NET 10 SDK and later"). global.json sets
+      # rollForward: latestMajor, so a runner with a newer SDK installed picks it up and that
+      # error appears even though the solution targets net9.0.
+      #
+      # Invoking the compiled test host directly sidesteps the SDK's test CLI entirely: the
+      # executable is the same on every SDK, it accepts xUnit's own arguments, and it exits
+      # non-zero when a test fails (verified). Do not "simplify" these back to `dotnet test`
+      # without checking which SDK the runner resolves.
+      - name: Unit tests
+        shell: pwsh
+        run: |
+          ./tests/AdNoir.UnitTests/bin/Release/net9.0/AdNoir.UnitTests.exe -result-trx TestResults/unit-tests.trx
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Architecture tests
+        shell: pwsh
+        run: |
+          ./tests/AdNoir.ArchitectureTests/bin/Release/net9.0/AdNoir.ArchitectureTests.exe -result-trx TestResults/architecture-tests.trx
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: test-results
+          path: TestResults/*.trx
+          if-no-files-found: ignore
+          retention-days: 14

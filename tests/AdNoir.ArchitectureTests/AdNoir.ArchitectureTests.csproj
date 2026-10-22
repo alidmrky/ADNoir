@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Machine-enforced architecture rules.
+    Mono.Cecil is referenced directly because two rules require method-BODY (IL) analysis,
+    which NetArchTest cannot do.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.ArchitectureTests</RootNamespace>
+    <IsTestProject>true</IsTestProject>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <!-- .NET 10 SDK requires opt-in to the new dotnet test experience for xunit.v3 -->
+    <UseMicrosoftTestingPlatform>true</UseMicrosoftTestingPlatform>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Services\IdentityAndOrg\AdNoir.IdentityAndOrg.Api\AdNoir.IdentityAndOrg.Api.csproj" />
+    <ProjectReference Include="..\..\src\Services\Sample\AdNoir.Sample.Api\AdNoir.Sample.Api.csproj" />
+    <ProjectReference Include="..\..\src\Services\Notification\AdNoir.Notification.Api\AdNoir.Notification.Api.csproj" />
+    <ProjectReference Include="..\..\src\Tools\AdNoir.DbMigrator\AdNoir.DbMigrator.csproj" />
+    <ProjectReference Include="..\..\src\Gateway\AdNoir.Gateway\AdNoir.Gateway.csproj" />
+    <ProjectReference Include="..\..\src\Shared\AdNoir.Shared.Contracts\AdNoir.Shared.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Shared\AdNoir.Domain.Abstractions\AdNoir.Domain.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\Shared\AdNoir.BuildingBlocks\AdNoir.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\..\src\Shared\AdNoir.BuildingBlocks.Mongo\AdNoir.BuildingBlocks.Mongo.csproj" />
+    <ProjectReference Include="..\AdNoir.TestKit\AdNoir.TestKit.csproj" />
+
+    <!-- Service assemblies must be referenced for the layer rules to see them at all.
+         Without these the rules stay green while checking nothing about the new projects. -->
+    <ProjectReference Include="..\..\src\Services\IdentityAndOrg\AdNoir.IdentityAndOrg.Domain\AdNoir.IdentityAndOrg.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Services\IdentityAndOrg\AdNoir.IdentityAndOrg.Application\AdNoir.IdentityAndOrg.Application.csproj" />
+    <ProjectReference Include="..\..\src\Services\IdentityAndOrg\AdNoir.IdentityAndOrg.Infrastructure\AdNoir.IdentityAndOrg.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Services\Notification\AdNoir.Notification.Infrastructure\AdNoir.Notification.Infrastructure.csproj" />
+    <!-- Sample service — arch rules apply to every service -->
+    <ProjectReference Include="..\..\src\Services\Sample\AdNoir.Sample.Domain\AdNoir.Sample.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Services\Sample\AdNoir.Sample.Application\AdNoir.Sample.Application.csproj" />
+    <ProjectReference Include="..\..\src\Services\Sample\AdNoir.Sample.Infrastructure\AdNoir.Sample.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Shouldly" />
+    <PackageReference Include="NetArchTest.Rules" />
+    <PackageReference Include="Mono.Cecil" />
+    <PackageReference Include="coverlet.collector" />
+  </ItemGroup>
+
+</Project>

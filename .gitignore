@@ -1,0 +1,46 @@
+## Build output
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+TestResults/
+
+## Secrets — the real .env NEVER enters the repository, only .env.example does (plan section 0)
+.env
+.env.local
+*.env
+!.env.example
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+.vscode/
+.idea/
+
+## Rider / ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+## Coverage
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+
+## MSBuild / NuGet
+project.lock.json
+project.fragment.lock.json
+*.nupkg
+*.snupkg
+.nuget/
+
+## OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store

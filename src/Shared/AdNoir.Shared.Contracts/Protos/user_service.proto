@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+option csharp_namespace = "AdNoir.IdentityAndOrg.Grpc";
+
+package adnoir.identity.v1;
+
+// Identity's synchronous surface for other services.
+//
+// The reason this exists is the cold start of the permission cache. Every
+// service keeps a tenant's role-to-permission matrix in HybridCache under a key containing
+// the tenant id and the matrix version, so an authorization check is a dictionary lookup with
+// no network call. But on a fresh process - or right after the matrix version changes - the
+// cache is empty and the matrix has to come from somewhere. That somewhere is this RPC.
+//
+// Omitting it is an easy oversight that breaks authorization on the very first request after
+// every deployment.
+service UserService {
+  // Live check, independent of the permission matrix cache. Never cache this response.
+  rpc ValidateUserSession (ValidateUserSessionRequest) returns (ValidateUserSessionResponse);
+  // Returns the role-to-permission matrix for a tenant.
+  //
+  // Callers must fail closed if this call fails: a request whose permissions cannot be
+  // verified is rejected, never allowed through on the assumption that it was probably fine.
+  rpc GetPermissionMatrix (GetPermissionMatrixRequest) returns (GetPermissionMatrixResponse);
+}
+
+message ValidateUserSessionRequest {
+  string tenant_id = 1;
+  string user_id = 2;
+  string security_stamp = 3;
+  int64 permission_version = 4;
+}
+
+message ValidateUserSessionResponse {
+  // 0 = invalid, 1 = valid, 2 = password change required; unknown values fail closed.
+  int32 state = 1;
+}
+
+message GetPermissionMatrixRequest {
+  // Tenant to load the matrix for, as a GUID string.
+  string tenant_id = 1;
+
+  // The version the caller already holds, or 0 when it holds nothing. When it matches the
+  // current version the response comes back with unchanged = true and no role data, which
+  // keeps a revalidation cheap.
+  int64 known_version = 2;
+}
+
+message GetPermissionMatrixResponse {
+  string tenant_id = 1;
+
+  // Current matrix version. Part of the caller's cache key, so a change invalidates the
+  // cached copy by itself.
+  int64 version = 2;
+
+  // True when known_version already matched; roles is then empty.
+  bool unchanged = 3;
+
+  repeated RolePermissions roles = 4;
+}
+
+message RolePermissions {
+  // Stable role code, the same value that appears in the token's roles claim.
+  string role_code = 1;
+
+  // Permissions in module:action form.
+  repeated string permissions = 2;
+}

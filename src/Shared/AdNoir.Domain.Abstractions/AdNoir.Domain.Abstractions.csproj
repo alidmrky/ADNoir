@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    This project references NOTHING. Pure BCL, no infrastructure package.
+    Service Domain projects reference only this one, which is what keeps domain code free
+    of MongoDB, MassTransit and ASP.NET Core.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.Domain.Abstractions</RootNamespace>
+  </PropertyGroup>
+
+</Project>

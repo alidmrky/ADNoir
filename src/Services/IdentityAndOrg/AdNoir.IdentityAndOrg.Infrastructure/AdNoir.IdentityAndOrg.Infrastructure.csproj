@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The adapter layer. References Application, Domain and BuildingBlocks.Mongo.
+    This is the only place in the service allowed to know about MongoDB, and the only place
+    allowed to use MassTransit directly.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.IdentityAndOrg.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdNoir.IdentityAndOrg.Application\AdNoir.IdentityAndOrg.Application.csproj" />
+    <ProjectReference Include="..\AdNoir.IdentityAndOrg.Domain\AdNoir.IdentityAndOrg.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Shared\AdNoir.BuildingBlocks.Mongo\AdNoir.BuildingBlocks.Mongo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" />
+    <PackageReference Include="MassTransit.RabbitMQ" />
+    <PackageReference Include="MassTransit.MongoDb" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,147 @@
+# =============================================================================
+# AdNoir — local infrastructure
+# =============================================================================
+# NOT USED ON THE CURRENT DEVELOPMENT MACHINE. No container runtime is installed here;
+# this file exists for CI and for any machine that does have Docker. The services run
+# without it.
+#
+# Gateway runs only with --profile gateway; upstream APIs run separately.
+#
+# Usage where Docker IS available:
+#   copy .env.example .env
+#   docker compose up -d
+#
+# IMPORTANT (known risk): a replica set advertises its own member
+# address. Add `127.0.0.1 mongo` to the host's hosts file, otherwise connections from
+# the host time out even though the container is healthy.
+# =============================================================================
+
+name: adnoir
+
+services:
+
+  mongo:
+    image: mongo:7.0
+    container_name: adnoir-mongo
+    restart: unless-stopped
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - mongo-config:/data/configdb
+    healthcheck:
+      # Reports healthy only once the replica set has a PRIMARY, not merely when the
+      # process is up. Without this the initiator races the server and fails.
+      test: ["CMD", "mongosh", "--quiet", "--eval", "try { rs.status().ok } catch (e) { 0 }"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  mongo-init:
+    # One-shot replica set initiator. Idempotent: re-running it on an initialised set
+    # is a no-op, so `docker compose up` stays safe to repeat.
+    image: mongo:7.0
+    container_name: adnoir-mongo-init
+    depends_on:
+      mongo:
+        condition: service_started
+    restart: "no"
+    entrypoint:
+      - bash
+      - -c
+      - |
+        until mongosh --host mongo:27017 --quiet --eval "db.adminCommand('ping').ok" >/dev/null 2>&1; do
+          echo "waiting for mongod..."
+          sleep 2
+        done
+        if mongosh --host mongo:27017 --quiet --eval "rs.status().ok" >/dev/null 2>&1; then
+          echo "replica set already initialised"
+        else
+          echo "initiating replica set rs0"
+          mongosh --host mongo:27017 --quiet --eval '
+            rs.initiate({
+              _id: "rs0",
+              members: [{ _id: 0, host: "mongo:27017" }]
+            })
+          '
+        fi
+
+  redis:
+    image: redis:7-alpine
+    container_name: adnoir-redis
+    restart: unless-stopped
+    # Cache only: persistence is deliberately off. Turning AOF on would promote Redis
+    # from a disposable cache to a stateful service that needs backups.
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    container_name: adnoir-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${AdNoir__RabbitMq__Username:-adnoir}
+      RABBITMQ_DEFAULT_PASS: ${AdNoir__RabbitMq__Password:-change-me}
+      RABBITMQ_DEFAULT_VHOST: ${AdNoir__RabbitMq__VirtualHost:-/}
+    ports:
+      - "5672:5672"    # AMQP
+      - "15672:15672"  # management UI — being able to see stuck messages is the point
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_running"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  seq:
+    # Structured log collector. Serilog writes compact JSON here.
+    image: datalust/seq:latest
+    container_name: adnoir-seq
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+    ports:
+      - "5341:5341"   # ingestion
+      - "8081:80"     # UI
+    volumes:
+      - seq-data:/data
+
+  gateway:
+    # Optional: upstream APIs must already be reachable from the container.
+    profiles: ["gateway"]
+    build:
+      context: .
+      dockerfile: src/Gateway/AdNoir.Gateway/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5070:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      AdNoir__Redis__ConnectionString: redis:6379
+      AdNoir__Jwt__Issuer: ${AdNoir__Jwt__Issuer:-http://localhost:5080}
+      AdNoir__Jwt__Audience: ${AdNoir__Jwt__Audience:-adnoir}
+      # HTTPS is mandatory outside Development; configure a trusted upstream certificate.
+      AdNoir__Jwt__JwksUri: ${ADNOIR_GATEWAY_JWKS_URI:-https://host.docker.internal:5081/.well-known/jwks.json}
+      ReverseProxy__Clusters__identity__Destinations__primary__Address: ${ADNOIR_GATEWAY_IDENTITY_URL:-http://host.docker.internal:5080/}
+      ReverseProxy__Clusters__sample__Destinations__primary__Address: ${ADNOIR_GATEWAY_SAMPLE_URL:-http://host.docker.internal:5090/}
+      AdNoir__Otel__ServiceName: adnoir-gateway
+    depends_on:
+      redis:
+        condition: service_healthy
+volumes:
+  mongo-data:
+  mongo-config:
+  rabbitmq-data:
+  seq-data:

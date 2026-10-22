@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    References Domain, Shared.Contracts and BuildingBlocks.
+    Must NOT reference BuildingBlocks.Mongo (arch test enforces this).
+    Must NOT reference MassTransit (arch test enforces this).
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.Notification.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdNoir.Notification.Domain\AdNoir.Notification.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Shared\AdNoir.Shared.Contracts\AdNoir.Shared.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\Shared\AdNoir.BuildingBlocks\AdNoir.BuildingBlocks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+  </ItemGroup>
+
+</Project>

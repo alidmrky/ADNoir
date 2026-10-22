@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <RootNamespace>AdNoir.Gateway</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../Shared/AdNoir.BuildingBlocks/AdNoir.BuildingBlocks.csproj" />
+    <PackageReference Include="Yarp.ReverseProxy" />
+    <PackageReference Include="RedisRateLimiting.AspNetCore" />
+    <PackageReference Include="StackExchange.Redis" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+  </ItemGroup>
+</Project>

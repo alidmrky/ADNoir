@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    References only Domain.Abstractions. No infrastructure knowledge here.
+    This project exists to demonstrate service patterns and is intentionally thin.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>AdNoir.Sample.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\AdNoir.Domain.Abstractions\AdNoir.Domain.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
