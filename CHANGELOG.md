@@ -16,6 +16,20 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+Nothing yet. · Henüz bir şey yok.
+
+---
+
+## [0.2.0] — 2026-10-22
+
+Published the same day as `0.1.0`. `0.1.0` was tagged when the repository went public and
+never got a release; this is the first release, and it carries a breaking path change, so
+it takes a new minor rather than quietly replacing the earlier tag.
+
+`0.1.0` ile aynı gün yayınlandı. `0.1.0`, repo public olduğunda etiketlendi ve hiç release
+almadı; bu ilk release ve kırıcı bir yol değişikliği taşıdığı için önceki etiketi sessizce
+değiştirmek yerine yeni bir minor alıyor.
+
 ### Changed — Değişenler
 
 - **BREAKING:** every HTTP business endpoint moved from `/api/...` to `/api/v1/...`.
@@ -150,5 +164,6 @@ Bu sürüm **üretim için sertleştirilmemiştir**. TLS, secret yönetimi, yede
 planlaması hedef ortama bırakılmıştır. Somut ödünler için [SECURITY.md](SECURITY.md)
 içindeki sınırlar tablosuna bak.
 
-[Unreleased]: https://github.com/alidmrky/ADNoir/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/alidmrky/ADNoir/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/alidmrky/ADNoir/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/alidmrky/ADNoir/releases/tag/v0.1.0

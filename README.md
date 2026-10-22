@@ -8,7 +8,7 @@
 
 [![CI](https://github.com/alidmrky/ADNoir/actions/workflows/ci.yml/badge.svg)](https://github.com/alidmrky/ADNoir/actions/workflows/ci.yml)
 ![Development](https://img.shields.io/badge/status-active%20development-orange)
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Version](https://img.shields.io/badge/version-0.2.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![.NET](https://img.shields.io/badge/.NET-9-512BD4?logo=dotnet&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/database-MongoDB-47A248?logo=mongodb&logoColor=white)
@@ -149,7 +149,7 @@ Güvenlik açığı bildirimi için issue açma; [SECURITY.md](SECURITY.md) içi
 
 ## Sürüm ve kararlılık
 
-Güncel sürüm **0.1.0**. Proje `0.x` hattındadır: public yüzey kararlı değildir ve `1.0.0`'a kadar kırıcı değişiklikler herhangi bir minor sürümde gelebilir. Neyin sözleşme sayıldığı ve neyin kırıcı kabul edildiği [API değişiklik politikasındadır](docs/development/api-policy.md). Sürüm geçmişi [CHANGELOG.md](CHANGELOG.md) içindedir.
+Güncel sürüm **0.2.0**. Proje `0.x` hattındadır: public yüzey kararlı değildir ve `1.0.0`'a kadar kırıcı değişiklikler herhangi bir minor sürümde gelebilir. Neyin sözleşme sayıldığı ve neyin kırıcı kabul edildiği [API değişiklik politikasındadır](docs/development/api-policy.md). Sürüm geçmişi [CHANGELOG.md](CHANGELOG.md) içindedir.
 
 ## Lisans
 

@@ -20,8 +20,8 @@ environment. See [docs/overview.md](docs/overview.md) for the current usage limi
 
 | Version | Supported |
 |---|---|
-| `0.1.x` | ✅ Current development line |
-| < `0.1.0` | ❌ Unreleased history, not supported |
+| `0.2.x` | ✅ Current development line |
+| < `0.2.0` | ❌ Superseded; the API paths differ |
 
 Only the latest tag on `main` receives fixes. There are no backports.
 
@@ -102,8 +102,8 @@ için [docs/overview.md](docs/overview.md) dosyasına bak.
 
 | Sürüm | Destek |
 |---|---|
-| `0.1.x` | ✅ Güncel geliştirme hattı |
-| < `0.1.0` | ❌ Yayınlanmamış geçmiş, desteklenmiyor |
+| `0.2.x` | ✅ Güncel geliştirme hattı |
+| < `0.2.0` | ❌ Geçersiz; API yolları farklı |
 
 Yalnız `main` üzerindeki en son etiket düzeltme alır. Geriye dönük yama yapılmaz.
 
