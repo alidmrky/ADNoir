@@ -6,11 +6,23 @@ obj/
 artifacts/
 TestResults/
 
-## Secrets — the real .env NEVER enters the repository, only .env.example does (plan section 0)
+## Secrets — the real .env NEVER enters the repository, only .env.example does.
+## The .env.* line matters for the frontend: Vite reads .env.development / .env.production
+## / .env.local, and none of those match the `.env` or `*.env` patterns above.
 .env
 .env.local
+.env.*
 *.env
 !.env.example
+
+## Frontend
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+.eslintcache
+playwright-report/
+test-results/
 
 ## User-specific files
 *.user

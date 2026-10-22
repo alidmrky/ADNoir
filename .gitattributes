@@ -1,0 +1,30 @@
+# Line endings.
+#
+# .editorconfig sets end_of_line = crlf for the working tree, which suits a Windows
+# development machine. This file keeps the repository itself normalised to LF, so a
+# checkout on another platform does not produce a diff on every file.
+#
+# text=auto: Git decides per file whether it is text, normalises it to LF in the index,
+# and converts on checkout according to core.autocrlf.
+* text=auto
+
+# Files that must stay LF regardless of platform: a CRLF shebang line is a syntax error.
+*.sh text eol=lf
+
+# Lockfiles are tool-managed. Leaving them untouched avoids spurious diffs and keeps the
+# integrity hashes that some tools compute over the raw bytes.
+pnpm-lock.yaml -text
+package-lock.json -text
+
+# Binary.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
+*.nupkg binary
+*.snupkg binary

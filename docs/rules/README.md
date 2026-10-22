@@ -16,7 +16,12 @@ bağlayıcı kaynak, aşağıdaki rehberler açıklayıcı kaynaktır.
 | Saf domain soyutlamaları | [Domain.Abstractions](../../src/Shared/AdNoir.Domain.Abstractions/AGENTS.md) |
 | Gateway sınırı | [Gateway](../../src/Gateway/AGENTS.md) |
 | Index/seed araçları | [Tools](../../src/Tools/AGENTS.md) |
+| Frontend (React) kuralları | [UI](../../ui/AGENTS.md) |
 | Dokümantasyon bakımı | [Docs](../AGENTS.md) |
+
+UI kural dosyası kendi kendine yeter: kök kurallardan miras almaz, çünkü kökün katman
+tablosu, response sözleşmesi, MassTransit ve Mongo bölümleri C#'a özgüdür. Frontend'i
+bağlayan her şey [ui/AGENTS.md](../../ui/AGENTS.md) içindedir.
 
 Yeni servis veya klasör kuralı genel kurala ters düşemez. Tarihsel kodun kurala uymayan
 örneklerini yeni geliştirmeye kopyalama. Kullanıcının açık talebiyle değişen kararları

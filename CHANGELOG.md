@@ -16,7 +16,29 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-Nothing yet. · Henüz bir şey yok.
+### Added — Eklenenler
+
+- `ui/AGENTS.md`: binding rules for the React frontend, written before the project is
+  scaffolded so the layer boundaries exist before there is code to fit around them. The
+  file is **self-contained** — it does not inherit from the root rules, because the root's
+  layer table, response contract, MassTransit and Mongo sections are C#-specific.
+  Covers the envelope, message codes, the token and 401/403 handling, the tenant and
+  permission rules, the Zustand/TanStack Query boundary, i18n, shadcn, generated types,
+  forms and the definition of done.
+- `docs/development/ui.md`: the explanatory counterpart — target directory tree, how each
+  layer maps onto the backend's, the OpenAPI generation flow, and the gateway/CORS
+  relationship.
+
+### Changed — Değişenler
+
+- `.gitignore` gains Node entries. Note the existing `.env` / `*.env` patterns did **not**
+  match Vite's `.env.development` or `.env.local`, so those would have been committed.
+- `.editorconfig` gains a 2-space block for `ts/tsx/js/jsx/css/scss/html`; they previously
+  inherited the 4-space default.
+- `.gitattributes` added: the repository had none, so line endings depended on each
+  contributor's Git configuration.
+- `.env.example` now sets `AdNoir__Gateway__AllowedOrigins__0=http://localhost:5173` rather
+  than leaving it commented out — the frontend dev server is a real client now.
 
 ---
 

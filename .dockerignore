@@ -3,8 +3,11 @@
 .git
 .vs
 .env
+**/.env.*
 **/*.env
 **/*.pem
 **/*.key
 artifacts
 TestResults
+**/node_modules
+ui/dist

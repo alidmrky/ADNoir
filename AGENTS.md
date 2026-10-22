@@ -8,6 +8,8 @@
   altyapısını servis içinde tekrar yazma. Servise özel iş mantığını Shared'a taşıma.
 - Konu kuralları src/Services, src/Shared, src/Gateway ve src/Tools altındaki AGENTS.md
   dosyalarındadır. Dokümantasyon girişi docs/README.md; kurallar ilgili AGENTS.md içinde tutulur.
+- Bu dosya backend içindir. Frontend'in kuralları ui/AGENTS.md içindedir ve buradan miras
+  almaz; aşağıdaki katman, response, mesajlaşma ve veri bölümleri ui dizinine uygulanmaz.
 - Korumalı servis istekleri canlı kullanıcı oturumu doğrulamasından geçer;
   permission cache'i stamp/parola kontrolünü atlatamaz. Anonymous yalnız açık uçlara atanır.
 
