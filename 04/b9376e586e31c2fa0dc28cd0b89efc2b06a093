@@ -1,0 +1,42 @@
+docs/README.md
+  s_ed044241ef8578::t_a2fe323de90bd3 22
+docs/rules/README.md
+  s_ed044241ef8578::t_68f02df2ba2960 19,22-25
+.env.example
+  s_ed044241ef8578::t_8a78abc5283992 99-101
+.gitattributes
+  s_ed044241ef8578::t_921c945b3a1a13 1-30
+.editorconfig
+  s_ed044241ef8578::t_c0fad55fa54a87 14-18
+docs/development/ui.md
+  s_ed044241ef8578::t_b0554d99ff24e5 1-154
+.dockerignore
+  s_ed044241ef8578::t_f9c85b11cf77d9 6,11-13
+CHANGELOG.md
+  s_ed044241ef8578::t_b352aba9465d12 19-41
+.github/CODEOWNERS
+  s_ed044241ef8578::t_01e1693ca15019 35-42
+AGENTS.md
+  s_ed044241ef8578::t_46d649f4489d5e 11-12
+.gitignore
+  s_ed044241ef8578::t_612a32e1a50ed2 9-11,14,18-25
+  s_ed044241ef8578::t_c91ec758cc3306 26
+ui/AGENTS.md
+  s_ed044241ef8578::t_168a307f3a97a4 1-230
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "04b9376e586e31c2fa0dc28cd0b89efc2b06a093",
+  "prompts": {},
+  "sessions": {
+    "s_ed044241ef8578": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17b26bb1-ad57-4dd7-b83b-05812c0cc6e6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Ali Demirkaya <alidmrky@gmail.com>"
+    }
+  }
+}
