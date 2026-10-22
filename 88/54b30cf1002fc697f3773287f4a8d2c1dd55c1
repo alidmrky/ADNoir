@@ -1,0 +1,19 @@
+.github/dependabot.yml
+  s_ed044241ef8578::t_a13876cc73a108 34-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8854b30cf1002fc697f3773287f4a8d2c1dd55c1",
+  "prompts": {},
+  "sessions": {
+    "s_ed044241ef8578": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17b26bb1-ad57-4dd7-b83b-05812c0cc6e6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Ali Demirkaya <alidmrky@gmail.com>"
+    }
+  }
+}
