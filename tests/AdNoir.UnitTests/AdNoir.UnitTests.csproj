@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <!--
-    Pure domain rules, no MongoDB ("hierarchy move and cycle protection are
-    unit-tested without Mongo; turning everything into an integration test slows us down").
+    Pure rules, no MongoDB: hierarchy moves and cycle protection, slug derivation, lockout,
+    effective data scope and the role-grant policy are all decidable without a database.
+    Turning them into integration tests would make them slower and no more trustworthy.
   -->
 
   <PropertyGroup>
@@ -10,7 +11,11 @@
     <IsTestProject>true</IsTestProject>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
-    <!-- .NET 10 SDK requires opt-in to the new dotnet test experience for xunit.v3 -->
+    <!--
+      Does not make `dotnet test` work on a .NET 10 SDK: that removed the VSTest bridge
+      xunit.v3 was reached through, and this property does not restore it. CI runs the
+      compiled test host directly instead. See .github/workflows/ci.yml.
+    -->
     <UseMicrosoftTestingPlatform>true</UseMicrosoftTestingPlatform>
   </PropertyGroup>
 
@@ -20,6 +25,10 @@
     <ProjectReference Include="..\..\src\Shared\AdNoir.BuildingBlocks\AdNoir.BuildingBlocks.csproj" />
     <!-- Pure functions only (collection naming, masking). No Mongo connection is opened here. -->
     <ProjectReference Include="..\..\src\Shared\AdNoir.BuildingBlocks.Mongo\AdNoir.BuildingBlocks.Mongo.csproj" />
+    <!-- Hierarchy, slug, lockout and scope rules are pure functions; no Mongo connection is opened. -->
+    <ProjectReference Include="..\..\src\Services\IdentityAndOrg\AdNoir.IdentityAndOrg.Domain\AdNoir.IdentityAndOrg.Domain.csproj" />
+    <!-- RoleGrantPolicy is the privilege-escalation guard. Its repositories are substituted. -->
+    <ProjectReference Include="..\..\src\Services\IdentityAndOrg\AdNoir.IdentityAndOrg.Application\AdNoir.IdentityAndOrg.Application.csproj" />
     <ProjectReference Include="..\AdNoir.TestKit\AdNoir.TestKit.csproj" />
   </ItemGroup>
 

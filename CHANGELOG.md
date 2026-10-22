@@ -18,6 +18,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added — Eklenenler
 
+- Unit tests for the domain rules that previously had none: slug derivation, hierarchy path
+  construction and rebasing, subtree rewrites and cycle protection, account lockout, the
+  effective read/write data scope, and the role-grant policy that prevents privilege
+  escalation. The suite goes from 66 to 235 tests, none of which need a database.
+  Each security-critical rule was mutation-checked — the guard was removed, the expected
+  tests were confirmed to fail, and the guard was restored.
 - GitHub Actions CI: build in `Release` with warnings as errors, plus the unit and
   architecture test suites, on every push and pull request. Integration checks that need
   MongoDB are deliberately excluded.
