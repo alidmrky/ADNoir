@@ -1,0 +1,16 @@
+export const permissions = [
+  'tenant:read',
+  'tenant:manage',
+  'orgunit:read',
+  'orgunit:write',
+  'orgunit:manage',
+  'user:read',
+  'user:write',
+  'user:manage',
+  'role:read',
+  'role:manage',
+  'audit:read',
+  'item:read',
+  'item:write',
+  'notification:read',
+] as const;

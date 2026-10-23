@@ -196,6 +196,10 @@ Backend'in her yanıtı — 404 ve 500 dahil — `BaseResponse` zarfıyla gelir.
 - Üretilenler yalnız **payload** şekilleridir. Zarf, hata eşlemesi ve durum işleme
   `lib/http` içinde elle yazılır; OpenAPI dokümanı 415, 429, 502, 503 ve 504'ü bildirmez,
   üretilen durum birleşimi gerçek durumları imkânsız gösterir.
+- Mevcut backend'de request enumları sayısal, response enumları camelCase string'dir.
+  Üretici `DataScopeInput` ve `TenantStatusInput` tiplerini ayrı tutar. Notification
+  OpenAPI yanıt şemaları eksik olduğundan payload'ları gerçek C# record tanımlarından
+  üretilir; sınırlar ve yenileme komutları `docs/development/ui.md` içinde açıklanır.
 - `contracts/message-codes.ts` ve `contracts/permissions.ts` backend'den elle yansıtılır ve
   **testle** doğrulanır, gözle değil. Sözleşmenin OpenAPI'de adı geçmeyen tek parçası budur.
 

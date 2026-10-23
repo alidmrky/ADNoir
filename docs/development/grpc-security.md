@@ -74,3 +74,5 @@ portları gerekir. Betik ayrı veritabanı ve kendi süreçlerini açıp sonunda
 login/setup dahil sayıdır: HTTP/2 kimlik/tenant reddi, yetkili çağrılar, eksik istemci anahtarıyla
 başlangıç hatası ve iki gerçek servisin boş cache üzerinden başarılı yetkilendirmesi.
 Üretim TLS/secret dağıtımı ve canlı ağ erişimi ayrıca doğrulanmalıdır; unit test kullanılmaz.
+
+Development ortamında Visual Studio proje dizininden başlatsa da varsayılan .env dosyası content root içinde yoksa en yakın üst AdNoir.sln dosyasının yanından yüklenir. Projeye özel .env önceliklidir; dosyalar birleştirilmez. Ayar değişikliklerinden sonra süreçleri yeniden başlatın.

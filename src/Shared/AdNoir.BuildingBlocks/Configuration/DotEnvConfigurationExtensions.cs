@@ -23,7 +23,7 @@ public static class DotEnvConfigurationExtensions
     }
 
     /// <summary>
-    /// Adds the <c>.env</c> file outside production only.
+    /// Adds the <c>.env</c> file in Development only, resolving the default file from the content root.
     /// </summary>
     /// <param name="builder">The configuration builder.</param>
     /// <param name="environment">The host environment.</param>
@@ -42,8 +42,32 @@ public static class DotEnvConfigurationExtensions
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(environment);
 
-        return environment.IsProduction()
-            ? builder
-            : builder.AddDotEnvFile(path, optional: true);
+        if (!environment.IsDevelopment())
+        {
+            return builder;
+        }
+
+        ArgumentException.ThrowIfNullOrWhiteSpace(path);
+        return builder.AddDotEnvFile(path == ".env" ? FindDevelopmentFile(environment.ContentRootPath) : path, optional: true);
+    }
+
+    private static string FindDevelopmentFile(string contentRoot)
+    {
+        string localPath = Path.Join(contentRoot, ".env");
+        if (File.Exists(localPath))
+        {
+            return localPath;
+        }
+
+        // Stop at this repository's solution boundary; never load an unrelated ancestor's secrets.
+        for (DirectoryInfo? directory = new(contentRoot); directory is not null; directory = directory.Parent)
+        {
+            if (File.Exists(Path.Join(directory.FullName, "AdNoir.sln")))
+            {
+                return Path.Join(directory.FullName, ".env");
+            }
+        }
+
+        return localPath;
     }
 }

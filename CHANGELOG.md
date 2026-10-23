@@ -18,6 +18,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added — Eklenenler
 
+- React/Vite administration UI under `ui/`: authentication and password change,
+  tenant and organization management, users, role assignments, notification history,
+  and sample record creation/lookup. Includes Turkish/English catalogs, centralized
+  response parsing, single-flight token renewal, concurrency-aware forms, reproducible
+  payload generation, architecture probes, regression tests, and a dedicated UI CI job.
+
 - `ui/AGENTS.md`: binding rules for the React frontend, written before the project is
   scaffolded so the layer boundaries exist before there is code to fit around them. The
   file is **self-contained** — it does not inherit from the root rules, because the root's
