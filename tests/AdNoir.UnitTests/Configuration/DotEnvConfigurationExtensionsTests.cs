@@ -15,7 +15,7 @@ public sealed class DotEnvConfigurationExtensionsTests : IDisposable
     {
         Directory.CreateDirectory(ProjectPath);
         File.WriteAllText(Path.Combine(_root, "AdNoir.sln"), string.Empty);
-        File.WriteAllText(Path.Combine(_root, ".env"), "AdNoir__Identity__ServiceCredentials__sample__ServiceId=sample");
+        File.WriteAllText(Path.Join(_root, ".env"), "AdNoir__Identity__ServiceCredentials__sample__ServiceId=sample");
     }
 
     private string ProjectPath => Path.Join(_root, "src", "Services", "Sample");
