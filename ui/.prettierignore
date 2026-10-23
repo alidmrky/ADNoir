@@ -1,0 +1,6 @@
+node_modules/
+dist/
+openapi/
+src/contracts/generated/
+pnpm-lock.yaml
+AGENTS.md

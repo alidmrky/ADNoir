@@ -37,7 +37,7 @@ $env:DOTNET_ENVIRONMENT = "Development"
 dotnet .\src\Tools\AdNoir.DbMigrator\bin\Debug\net9.0\AdNoir.DbMigrator.dll
 ```
 
-**Neden depo kökü?** `.env` sağlayıcısı dosyayı süreç çalışma dizininden okur. Depo kökünden çalıştırmak burada bulunan `.env` dosyasının okunmasını sağlar.
+**Neden depo kökü?** Bu komutlardaki DLL yolları depo köküne göredir. Development ortamında varsayılan `.env` önce uygulamanın content root dizininde aranır; bulunamazsa üst dizinlerdeki en yakın `AdNoir.sln` dosyasının yanından yüklenir.
 
 **Neden DOTNET_ENVIRONMENT?** DbMigrator bir konsol uygulamasıdır ve generic host kullanır. Ortamı bu değişkenle Development yaparız; yalnız ASPNETCORE_ENVIRONMENT ayarlamak konsol host'u için yeterli değildir. Bu değişken ilgili terminal oturumu için geçerlidir.
 
@@ -89,7 +89,7 @@ Profili seçebildiğin yerlerde `http` kullan. Mevcut HTTP profilleri `ASPNETCOR
 
 `AdNoir.Shared.Contracts` gibi projeler kütüphanedir; doğrudan başlatılmaz. DbMigrator'ı her F5'te çalıştırmak gerekmez. Index/seed değişikliklerinde yeniden çalıştırılabilir; mevcut kayıtları kontrol edecek şekilde tasarlanmıştır.
 
-Visual Studio'nun başlattığı uygulamaların çalışma dizini depo kökü olmayabilir. Bu nedenle kökteki `.env` dosyasının her projede otomatik yüklendiğini varsayma. Özel bağlantıların varsa ilgili projenin debug profilindeki ortam değişkenlerinden tanımla veya [terminal çalıştırma rehberindeki](gateway.md) depo kökünden DLL başlatma yöntemini kullan.
+Visual Studio proje dizininden başlatsa da Development ortamında ortak yükleyici depo kökündeki `.env` dosyasını bulur. Projenin content root dizininde ayrı bir `.env` varsa o dosya önceliklidir; dosyalar birleştirilmez. Arama en yakın `AdNoir.sln` sınırında durur. Açıkça verilen özel dosya yolları aynen kullanılır. Development dışındaki ortamlarda `.env` yüklenmez.
 
 ## 6. Tarayıcıdan kontrol et
 
