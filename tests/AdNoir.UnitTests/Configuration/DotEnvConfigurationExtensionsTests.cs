@@ -18,7 +18,7 @@ public sealed class DotEnvConfigurationExtensionsTests : IDisposable
         File.WriteAllText(Path.Combine(_root, ".env"), "AdNoir__Identity__ServiceCredentials__sample__ServiceId=sample");
     }
 
-    private string ProjectPath => Path.Combine(_root, "src", "Services", "Sample");
+    private string ProjectPath => Path.Join(_root, "src", "Services", "Sample");
 
     [Fact]
     public void Development_project_loads_credentials_from_solution_root()
