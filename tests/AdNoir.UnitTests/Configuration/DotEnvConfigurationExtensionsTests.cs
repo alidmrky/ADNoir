@@ -29,7 +29,7 @@ public sealed class DotEnvConfigurationExtensionsTests : IDisposable
     [Fact]
     public void Project_local_file_takes_precedence()
     {
-        File.WriteAllText(Path.Combine(ProjectPath, ".env"), "AdNoir__Identity__ServiceCredentials__sample__ServiceId=local");
+        File.WriteAllText(Path.Join(ProjectPath, ".env"), "AdNoir__Identity__ServiceCredentials__sample__ServiceId=local");
         Build(Environments.Development)["AdNoir:Identity:ServiceCredentials:sample:ServiceId"].ShouldBe("local");
     }
 
