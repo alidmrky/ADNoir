@@ -54,7 +54,7 @@ public sealed class DotEnvConfigurationExtensionsTests : IDisposable
     [Fact]
     public void Missing_solution_does_not_load_ancestor_file()
     {
-        File.Delete(Path.Combine(_root, "AdNoir.sln"));
+        File.Delete(Path.Join(_root, "AdNoir.sln"));
         Build(Environments.Development)["AdNoir:Identity:ServiceCredentials:sample:ServiceId"].ShouldBeNull();
     }
 
