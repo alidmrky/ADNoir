@@ -61,7 +61,7 @@ public sealed class DotEnvConfigurationExtensionsTests : IDisposable
     [Fact]
     public void Nearest_solution_boundary_stops_search_even_without_env_file()
     {
-        File.WriteAllText(Path.Combine(ProjectPath, "AdNoir.sln"), string.Empty);
+        File.WriteAllText(Path.Join(ProjectPath, "AdNoir.sln"), string.Empty);
         Build(Environments.Development)["AdNoir:Identity:ServiceCredentials:sample:ServiceId"].ShouldBeNull();
     }
 
