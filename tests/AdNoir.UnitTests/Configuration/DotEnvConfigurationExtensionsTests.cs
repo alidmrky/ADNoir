@@ -44,7 +44,7 @@ public sealed class DotEnvConfigurationExtensionsTests : IDisposable
     [Fact]
     public void Explicit_path_is_preserved()
     {
-        string path = Path.Combine(_root, "custom.env");
+        string path = Path.Join(_root, "custom.env");
         File.WriteAllText(path, "Explicit=true");
         IConfigurationRoot configuration = Build(Environments.Development, path);
         configuration["Explicit"].ShouldBe("true");
