@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Plus, RefreshCw } from 'lucide-react';
 import { useUsers, getUser, saveUser } from '../api/queries';
 import { userKeys } from '../api/keys';
-import { createFields, mapUserField } from '../model/fields';
+import { createFields, resetPasswordFields, mapUserField } from '../model/fields';
 import { AssignmentForm } from './assignment-form';
 import { useEditor } from '../../../lib/query/use-editor';
 import { errorFeedback } from '../../../lib/query/feedback';
@@ -101,6 +101,14 @@ export function UsersPage() {
                   variant="ghost"
                   size="sm"
                   disabled={edit.opening}
+                  onClick={() => void edit.open('resetPassword', row.id)}
+                >
+                  {t('resetPassword')}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  disabled={edit.opening}
                   onClick={() => void edit.open(row.isActive ? 'deactivate' : 'activate', row.id)}
                 >
                   {t(row.isActive ? 'deactivate' : 'activate')}
@@ -132,6 +140,18 @@ export function UsersPage() {
               busy={busy}
               fieldErrors={edit.fieldErrors}
             />
+          ) : edit.editor.action === 'resetPassword' ? (
+            <>
+              <p>{edit.editor.record.displayName}</p>
+              <p>{t('resetPasswordDescription')}</p>
+              <RecordForm
+                key={edit.editor.revision}
+                fields={resetPasswordFields}
+                onSubmit={edit.submit}
+                busy={busy}
+                fieldErrors={edit.fieldErrors}
+              />
+            </>
           ) : (
             <>
               <p>{edit.editor.record.displayName}</p>

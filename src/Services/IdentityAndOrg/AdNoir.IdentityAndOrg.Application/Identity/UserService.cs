@@ -229,6 +229,62 @@ public sealed class UserService(
         return BaseResponse<UserDto>.Success(ToDto(user));
     }
 
+    /// <inheritdoc />
+    public async Task<BaseResponse<UserDto>> ResetPasswordAsync(
+        Guid id,
+        ResetUserPasswordRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        User? user = await _userRepository.FindByIdAsync(id, cancellationToken);
+
+        if (user is null)
+        {
+            return BaseResponse<UserDto>.NotFound(MessageCodes.Identity.UserNotFound, ("userId", id));
+        }
+
+        if (user.Version != request.ExpectedVersion)
+        {
+            return BaseResponse<UserDto>.ConcurrencyConflict();
+        }
+
+        // Resetting a password is equivalent to taking over the account, so the caller must be
+        // able to grant every role the target already holds (no empty change set needed).
+        IReadOnlyList<Role> available = await _roleRepository.ListForTenantAsync(
+            _tenantContext.TenantId,
+            cancellationToken);
+
+        if (!await grantPolicy.CanAssignAsync(user, [], available, cancellationToken))
+        {
+            return BaseResponse<UserDto>.Forbidden(MessageCodes.Auth.PermissionDenied);
+        }
+
+        DateTime utcNow = _timeProvider.GetUtcNow().UtcDateTime;
+        var auditBefore = IdentityAuditFields.Capture(user);
+
+        user.PasswordHash = _passwordHasher.Hash(request.NewPassword);
+        user.MustChangePassword = true;
+        user.AccessFailedCount = 0;
+        user.LockoutEndUtc = null;
+        user.RotateSecurityStamp();
+
+        await _unitOfWork.BeginAsync(cancellationToken);
+        await _userRepository.UpdateAsync(user, cancellationToken);
+        await _refreshTokenRepository.RevokeAllForUserAsync(
+            user.Id,
+            RefreshTokenRevocationReason.SecurityStampChanged,
+            utcNow,
+            cancellationToken);
+        await auditRecorder.RecordAsync(user.TenantId, user, ChangeKind.Updated,
+            IdentityAuditFields.Diff(auditBefore, IdentityAuditFields.Capture(user))
+                .Append(new FieldChange("Password", "previous", "reset"))
+                .Append(new FieldChange("SecurityStamp", "previous", "rotated")).ToArray(), cancellationToken);
+        await _unitOfWork.CommitAsync(cancellationToken);
+
+        return BaseResponse<UserDto>.Success(ToDto(user));
+    }
+
     private static UserDto ToDto(User user) =>
         new(
             user.Id,

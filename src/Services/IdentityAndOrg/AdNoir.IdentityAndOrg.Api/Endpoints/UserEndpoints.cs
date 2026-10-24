@@ -102,6 +102,23 @@ public static class UserEndpoints
             .ProducesEnvelope<UserDto>()
             .RequirePermission(PermissionCatalog.Users.Manage);
 
+        group.MapPost("/{id:guid}/reset-password", async (
+                Guid id,
+                ResetUserPasswordRequest request,
+                IUserService service,
+                CancellationToken cancellationToken) =>
+            {
+                return (await service.ResetPasswordAsync(id, request, cancellationToken)).ToHttpResult();
+            })
+            .WithName("ResetUserPassword")
+            .WithSummary("Replaces a user's forgotten password with a temporary one.")
+            .WithDescription(
+                "Revokes every session the user holds, clears any lockout and forces a password " +
+                "change at the next sign-in.")
+            .WithValidation<ResetUserPasswordRequest>()
+            .ProducesEnvelope<UserDto>()
+            .RequirePermission(PermissionCatalog.Users.Manage);
+
         return app;
     }
 

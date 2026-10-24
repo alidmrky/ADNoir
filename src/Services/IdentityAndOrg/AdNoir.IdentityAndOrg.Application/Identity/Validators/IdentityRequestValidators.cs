@@ -8,7 +8,7 @@ namespace AdNoir.IdentityAndOrg.Application.Identity.Validators;
 internal static class PasswordRules
 {
     /// <summary>Minimum password length.</summary>
-    public const int MinimumLength = 12;
+    public const int MinimumLength = 6;
 
     /// <summary>Maximum accepted length, to bound hashing work.</summary>
     public const int MaximumLength = 256;

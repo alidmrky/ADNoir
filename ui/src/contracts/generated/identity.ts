@@ -98,6 +98,11 @@ export interface RenameOrgUnitRequest {
   expectedVersion: number;
 }
 
+export interface ResetUserPasswordRequest {
+  newPassword: string;
+  expectedVersion: number;
+}
+
 export interface RoleAssignmentDto {
   roleId: string;
   roleCode: string;

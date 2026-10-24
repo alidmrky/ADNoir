@@ -11,6 +11,9 @@ export const createFields: FormField[] = [
   { name: 'orgUnitId', type: 'uuid' },
   { name: 'mustChangePassword', type: 'checkbox' },
 ];
+export const resetPasswordFields: FormField[] = [
+  { name: 'newPassword', label: 'temporaryPassword', type: 'password' },
+];
 const scopeValues: Record<DataScope, DataScopeInput> = { self: 0, unit: 1, subtree: 2, tenant: 3 };
 export const scopeLabels = ['scopeSelf', 'scopeOrgUnit', 'scopeSubtree', 'scopeTenant'];
 export function assignmentInitial(roles: RoleAssignmentDto[]) {
@@ -22,7 +25,7 @@ export function assignmentInitial(roles: RoleAssignmentDto[]) {
 }
 export function mapUserField(field: string) {
   const value = field[0]?.toLowerCase() + field.slice(1);
-  if (createFields.some((item) => item.name === value)) return value;
+  if ([...createFields, ...resetPasswordFields].some((item) => item.name === value)) return value;
   const match = /^assignments\[(\d+)\]\.(RoleId|RoleCode|ReadScope|WriteScope)$/.exec(value);
   const mapping: Record<string, string> = {
     RoleId: 'roleId',

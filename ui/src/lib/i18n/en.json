@@ -164,6 +164,13 @@
   "trial": "Trial",
   "deleted": "Deleted",
   "activationConfirm": "Are you sure you want to change the active status of this account?",
+  "forgotPassword": "Forgot your password?",
+  "forgotPasswordTitle": "Reset your password",
+  "forgotPasswordDescription": "Passwords are reset by an administrator of your tenant. Contact them and ask for a temporary password; you will be asked to choose a new one when you sign in.",
+  "backToLogin": "Back to sign in",
+  "resetPassword": "Reset password",
+  "resetPasswordDescription": "Set a temporary password. The user's sessions end and they must choose a new password at next sign-in.",
+  "temporaryPassword": "Temporary password",
   "deactivate": "Deactivate",
   "brandSymbol": "a",
   "renderError": "The screen could not be displayed. Reload the page to try again."
