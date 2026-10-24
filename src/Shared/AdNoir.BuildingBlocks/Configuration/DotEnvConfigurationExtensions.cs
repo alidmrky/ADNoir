@@ -53,7 +53,7 @@ public static class DotEnvConfigurationExtensions
 
     private static string FindDevelopmentFile(string contentRoot)
     {
-        string localPath = Path.Combine(contentRoot, ".env");
+        string localPath = Path.Join(contentRoot, ".env");
         if (File.Exists(localPath))
         {
             return localPath;
@@ -62,9 +62,9 @@ public static class DotEnvConfigurationExtensions
         // Stop at this repository's solution boundary; never load an unrelated ancestor's secrets.
         for (DirectoryInfo? directory = new(contentRoot); directory is not null; directory = directory.Parent)
         {
-            if (File.Exists(Path.Combine(directory.FullName, "AdNoir.sln")))
+            if (File.Exists(Path.Join(directory.FullName, "AdNoir.sln")))
             {
-                return Path.Combine(directory.FullName, ".env");
+                return Path.Join(directory.FullName, ".env");
             }
         }
 
