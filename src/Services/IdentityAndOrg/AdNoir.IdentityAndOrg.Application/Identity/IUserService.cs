@@ -52,6 +52,20 @@ public interface IUserService : IApplicationService
         bool isActive,
         long expectedVersion,
         CancellationToken cancellationToken = default);
+
+    /// <summary>Replaces a user's forgotten password with a temporary one.</summary>
+    /// <param name="id">The user identifier.</param>
+    /// <param name="request">The temporary password and expected version.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The updated user, or a failure response.</returns>
+    /// <remarks>
+    /// Ends every session of the user, clears any lockout and forces a password change at next
+    /// sign-in. Callers can only reset accounts whose roles they could grant themselves.
+    /// </remarks>
+    Task<BaseResponse<UserDto>> ResetPasswordAsync(
+        Guid id,
+        ResetUserPasswordRequest request,
+        CancellationToken cancellationToken = default);
 }
 
 /// <summary>Role administration.</summary>

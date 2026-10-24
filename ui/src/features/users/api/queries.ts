@@ -3,6 +3,7 @@ import type {
   UserDto,
   CreateUserRequest,
   AssignRolesRequest,
+  ResetUserPasswordRequest,
 } from '../../../contracts/generated/identity';
 import type { Page } from '../../../contracts/page';
 import { request } from '../../../lib/http/client';
@@ -30,6 +31,13 @@ export async function saveUser(
         expectedVersion: record.version,
       };
       return request(`/api/v1/users/${record.id}/roles`, { method: 'PUT', body });
+    }
+    if (action === 'resetPassword') {
+      const body: ResetUserPasswordRequest = {
+        newPassword: String(values.newPassword),
+        expectedVersion: record.version,
+      };
+      return request(`/api/v1/users/${record.id}/reset-password`, { method: 'POST', body });
     }
     return request(
       `/api/v1/users/${record.id}/${record.isActive ? 'deactivate' : 'activate'}?expectedVersion=${record.version}`,

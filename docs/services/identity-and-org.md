@@ -12,6 +12,12 @@ canlı kullanıcı oturumunu sorgular. İzin matrisi son kullanıcıya doğrudan
 Global sistem rolleri okunabilir; tenant'a ait özel roller diğer tenant'tan okunamaz.
 TenantAdmin, SuperAdmin atayamaz; sahip olunmayan izin veya daha geniş kapsam devredilemez.
 
+Parola en az 6, en çok 256 karakter olmalıdır; bileşim kuralı yoktur. "Şifremi unuttum"
+akışı e-posta göndermez: giriş sayfası kullanıcıyı tenant yöneticisine yönlendirir.
+Yönetici `POST /api/v1/users/{id}/reset-password` ile geçici parola verir (`users:manage`).
+İşlem oturumları kapatır, kilidi kaldırır, `MustChangePassword` işaretler ve audit'e yazılır.
+Hedef kullanıcının rolleri aktörün devredebileceği roller değilse (`IRoleGrantPolicy`) reddedilir.
+
 İlk kullanım: Mongo replica set → DbMigrator → Identity → Gateway/iş servisleri.
 [Kurulum](../development/first-run.md), [güvenlik](../architecture/security.md),
 [servis kuralları](../../src/Services/IdentityAndOrg/AGENTS.md).

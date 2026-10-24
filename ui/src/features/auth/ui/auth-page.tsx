@@ -22,6 +22,7 @@ export function AuthPage({
 }) {
   const { t, language, setLanguage } = useTranslation();
   const [registration, setRegistration] = useState(false);
+  const [forgot, setForgot] = useState(false);
   const [error, setError] = useState<unknown>();
   const [success, setSuccess] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -93,14 +94,26 @@ export function AuthPage({
           <span className="auth-mark">
             <ArrowUpRight size={25} />
           </span>
-          <h2>{t(passwordChange ? 'changePassword' : registration ? 'register' : 'loginTitle')}</h2>
+          <h2>
+            {t(
+              passwordChange
+                ? 'changePassword'
+                : forgot
+                  ? 'forgotPasswordTitle'
+                  : registration
+                    ? 'register'
+                    : 'loginTitle',
+            )}
+          </h2>
           <p>
             {t(
               passwordChange
                 ? 'changePasswordDescription'
-                : registration
-                  ? 'registerDescription'
-                  : 'loginDescription',
+                : forgot
+                  ? 'forgotPasswordDescription'
+                  : registration
+                    ? 'registerDescription'
+                    : 'loginDescription',
             )}
           </p>
           {requiredChange && <p className="password-notice">{t('passwordRequired')}</p>}
@@ -110,15 +123,31 @@ export function AuthPage({
             </p>
           )}
           <FeedbackBox value={feedback} />
-          <RecordForm
-            key={mode}
-            fields={passwordChange ? passwordFields : registration ? registerFields : loginFields}
-            onSubmit={submit}
-            busy={busy}
-            submitLabel={mode}
-            fieldErrors={fieldErrors}
-          />
-          {!passwordChange && (
+          {!forgot && (
+            <RecordForm
+              key={mode}
+              fields={passwordChange ? passwordFields : registration ? registerFields : loginFields}
+              onSubmit={submit}
+              busy={busy}
+              submitLabel={mode}
+              fieldErrors={fieldErrors}
+            />
+          )}
+          {!passwordChange && !registration && !forgot && (
+            <Button
+              className="auth-switch"
+              variant="ghost"
+              disabled={busy}
+              onClick={() => {
+                setForgot(true);
+                setError(undefined);
+                setSuccess(false);
+              }}
+            >
+              {t('forgotPassword')}
+            </Button>
+          )}
+          {!passwordChange && !forgot && (
             <Button
               className="auth-switch"
               variant="ghost"
@@ -130,6 +159,11 @@ export function AuthPage({
               }}
             >
               {t(registration ? 'login' : 'register')}
+            </Button>
+          )}
+          {forgot && (
+            <Button className="auth-switch" variant="ghost" onClick={() => setForgot(false)}>
+              {t('backToLogin')}
             </Button>
           )}
         </div>

@@ -164,6 +164,13 @@
   "trial": "Deneme",
   "deleted": "Silindi",
   "activationConfirm": "Bu hesabın etkinlik durumunu değiştirmek istediğinize emin misiniz?",
+  "forgotPassword": "Şifremi unuttum",
+  "forgotPasswordTitle": "Parolanızı sıfırlayın",
+  "forgotPasswordDescription": "Parolalar tenant yöneticiniz tarafından sıfırlanır. Yöneticinize ulaşıp geçici bir parola isteyin; giriş yaptığınızda yeni bir parola belirlemeniz istenecek.",
+  "backToLogin": "Girişe dön",
+  "resetPassword": "Parolayı sıfırla",
+  "resetPasswordDescription": "Geçici bir parola belirleyin. Kullanıcının oturumları kapanır ve bir sonraki girişte yeni parola belirlemesi gerekir.",
+  "temporaryPassword": "Geçici parola",
   "deactivate": "Devre dışı bırak",
   "brandSymbol": "a",
   "renderError": "Ekran görüntülenirken bir hata oluştu. Sayfayı yeniden yükleyin."
